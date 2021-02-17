@@ -1,0 +1,7 @@
+ManifestFileVersion: 0
+CRC: 17377804
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: piece_dvalintest
+      Dependencies: {}

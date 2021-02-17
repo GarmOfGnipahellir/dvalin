@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dvalin", "Dvalin.csproj", "{2C67423B-BCEC-4187-A132-0B26FDBA6BEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DvalinUnity", "DvalinUnity\DvalinUnity.csproj", "{F52370DB-D81E-45A0-030F-4A3FA4B76F09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C67423B-BCEC-4187-A132-0B26FDBA6BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C67423B-BCEC-4187-A132-0B26FDBA6BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C67423B-BCEC-4187-A132-0B26FDBA6BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C67423B-BCEC-4187-A132-0B26FDBA6BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F52370DB-D81E-45A0-030F-4A3FA4B76F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52370DB-D81E-45A0-030F-4A3FA4B76F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F52370DB-D81E-45A0-030F-4A3FA4B76F09}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F52370DB-D81E-45A0-030F-4A3FA4B76F09}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72D0AB31-4078-42FB-B11C-BAB98EA20183}
+	EndGlobalSection
+EndGlobal
