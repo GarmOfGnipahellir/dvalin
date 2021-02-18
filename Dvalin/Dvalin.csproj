@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CopyToPlugins>true</CopyToPlugins>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -75,9 +76,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y $(TargetDir)$(TargetFileName) $(SolutionDir)dist\BepInEx\plugins\$(ProjectName)\
-xcopy /Y $(TargetDir)DvalinUnity.dll $(SolutionDir)dist\BepInEx\plugins\$(ProjectName)\
-xcopy /Y $(ProjectDir)localization.csv $(SolutionDir)dist\BepInEx\plugins\$(ProjectName)\
-</PostBuildEvent>
+    <PostBuildEvent>xcopy /y $(TargetPath) $(SolutionDir)dist\
+xcopy /y $(TargetDir)DvalinUnity.dll $(SolutionDir)dist\
+xcopy /y $(ProjectDir)localization.csv $(SolutionDir)dist\
+
+if $(CopyToPlugins)==true xcopy /y /s $(SolutionDir)dist\ $(ValheimDir)BepInEx\plugins\$(SolutionName)\</PostBuildEvent>
   </PropertyGroup>
 </Project>
