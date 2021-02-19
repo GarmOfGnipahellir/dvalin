@@ -1,3 +1,5 @@
-﻿,English
-piece_dvalintest,Dvalin Test
-piece_dvalintest_description,This is just a test item.
+﻿,English,Swedish
+piece_dvalintest,Dvalin Test,Dvalin Test
+piece_dvalintest_description,This is just a test item.,Det här är en test grej.
+piece_dvalin_maptable,Map Table,Kartbord
+piece_dvalin_maptable_description,Allows you to share your discoveries.,Tillåter dig att dela dina upptäckter.

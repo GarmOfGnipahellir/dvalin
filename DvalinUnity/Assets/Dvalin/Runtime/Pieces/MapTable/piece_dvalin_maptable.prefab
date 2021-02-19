@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3974704162959458596}
   - component: {fileID: 3974704162959458618}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3974704164427088055}
+  - component: {fileID: 1204818791143714227}
   - component: {fileID: 3974704164427088053}
+  - component: {fileID: -8637557634084730906}
   - component: {fileID: 3974704164427088054}
   m_Layer: 0
   m_Name: piece_dvalin_maptable
@@ -127,6 +129,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1204818791143714227
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974704164427088048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &3974704164427088053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,9 +157,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_primaryTarget: 0
   m_randomTarget: 1
-  m_icon: {fileID: 0}
-  m_name: 
-  m_description: 
+  m_icon: {fileID: 21300000, guid: 87601c64f9e683248b9ce5dae709928a, type: 3}
+  m_name: $piece_dvalin_maptable
+  m_description: $piece_dvalin_maptable_description
   m_enabled: 1
   m_category: 0
   m_isUpgrade: 0
@@ -174,6 +190,50 @@ MonoBehaviour:
   m_craftingStation: {fileID: 0}
   m_resources: []
   m_destroyedLootPrefab: {fileID: 0}
+--- !u!114 &-8637557634084730906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974704164427088048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 895252998, guid: 35d991d936f889045a028998996835d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_new: {fileID: 3974704162959458598}
+  m_worn: {fileID: 0}
+  m_broken: {fileID: 0}
+  m_wet: {fileID: 0}
+  m_noRoofWear: 1
+  m_noSupportWear: 1
+  m_materialType: 0
+  m_supports: 1
+  m_comOffset: {x: 0, y: 0, z: 0}
+  m_health: 100
+  m_damages:
+    m_blunt: 0
+    m_slash: 0
+    m_pierce: 0
+    m_chop: 0
+    m_pickaxe: 0
+    m_fire: 0
+    m_frost: 0
+    m_lightning: 0
+    m_poison: 0
+    m_spirit: 0
+  m_minDamageTreshold: 0
+  m_hitNoise: 0
+  m_destroyNoise: 0
+  m_destroyedEffect:
+    m_effectPrefabs: []
+  m_hitEffect:
+    m_effectPrefabs: []
+  m_switchEffect:
+    m_effectPrefabs: []
+  m_autoCreateFragments: 1
+  m_fragmentRoots: []
 --- !u!114 &3974704164427088054
 MonoBehaviour:
   m_ObjectHideFlags: 0
