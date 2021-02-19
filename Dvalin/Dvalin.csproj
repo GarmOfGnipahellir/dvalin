@@ -76,10 +76,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y $(TargetPath) $(SolutionDir)dist\
-xcopy /y $(TargetDir)DvalinUnity.dll $(SolutionDir)dist\
-xcopy /y $(ProjectDir)localization.csv $(SolutionDir)dist\
+    <PostBuildEvent>xcopy /y "$(TargetPath)" "$(SolutionDir)dist\"
+xcopy /y "$(TargetDir)DvalinUnity.dll" "$(SolutionDir)dist\"
+xcopy /y "$(ProjectDir)localization.csv" "$(SolutionDir)dist\"
 
-if $(CopyToPlugins)==true xcopy /y /s $(SolutionDir)dist\ $(ValheimDir)BepInEx\plugins\$(SolutionName)\</PostBuildEvent>
+if $(CopyToPlugins)==true xcopy /y /s "$(SolutionDir)dist\" "$(PluginsDir)$(SolutionName)\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

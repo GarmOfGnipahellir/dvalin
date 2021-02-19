@@ -11,7 +11,7 @@ You need a user project file to define reference paths and Valheim dir. E.g:
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ReferencePath>\some\path\Valheim\valheim_Data\Managed\;\some\path\Valheim\BepInEx\core\</ReferencePath>
-    <ValheimDir>\some\path\Valheim\</ValheimDir>
+    <PluginsDir>\some\path\BepInEx\plugins\</PluginsDir>
   </PropertyGroup>
 </Project>
 ```
