@@ -14,6 +14,8 @@ namespace Dvalin.API
         {
             LocalizationSetupLanguagePatch.PostfixEvent += SetupLanguage;
             LocalizationTranslatePatch.PostfixEvent += TryTranslate;
+
+            SetupLanguage(Localization.instance.GetSelectedLanguage());
         }
 
         public void Destroy()
