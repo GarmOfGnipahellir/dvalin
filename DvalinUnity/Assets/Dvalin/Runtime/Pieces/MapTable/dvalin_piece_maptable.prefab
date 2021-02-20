@@ -291,9 +291,8 @@ GameObject:
   - component: {fileID: 3974704164427088053}
   - component: {fileID: 3974704164427088054}
   - component: {fileID: 2301877270631027593}
-  - component: {fileID: 8861908257259859711}
   m_Layer: 10
-  m_Name: piece_dvalin_maptable
+  m_Name: dvalin_piece_maptable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3974704164427088048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2094620348, guid: 35d991d936f889045a028998996835d4, type: 3}
+  m_Script: {fileID: 2094620348, guid: 01b5845124e3874469297fdc1064dad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_primaryTarget: 0
@@ -378,7 +377,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3974704164427088048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1521249158, guid: 35d991d936f889045a028998996835d4, type: 3}
+  m_Script: {fileID: 1521249158, guid: 01b5845124e3874469297fdc1064dad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_persistent: 1
@@ -404,21 +403,6 @@ MonoBehaviour:
   heightTexture: {fileID: 0}
   fogTexture: {fileID: 0}
   currentTexture: 0
---- !u!114 &8861908257259859711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3974704164427088048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1863081269, guid: 35d991d936f889045a028998996835d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_hoverText: Change Texture
-  m_name: change_texture
-  m_holdRepeatInterval: -1
 --- !u!1 &4868464700608381489
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,17 +903,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a5b7329534619634caaf20475de85aa9,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5b7329534619634caaf20475de85aa9,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5b7329534619634caaf20475de85aa9,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5b7329534619634caaf20475de85aa9,
         type: 3}

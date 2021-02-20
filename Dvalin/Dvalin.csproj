@@ -82,11 +82,6 @@ xcopy /y "$(TargetPath)" "$(SolutionDir)dist\"
 xcopy /y "$(TargetDir)DvalinUnity.dll" "$(SolutionDir)dist\"
 xcopy /y "$(ProjectDir)localization.csv" "$(SolutionDir)dist\"
 
-xcopy /y /s "$(TargetPath)" "$(SolutionDir)DvalinUnity\Packages\Dvalin\"
-xcopy /y /s "$(PluginsDir)..\core\0Harmony.dll" "$(SolutionDir)DvalinUnity\Packages\Dvalin\"
-xcopy /y /s "$(PluginsDir)..\core\BepInEx.dll" "$(SolutionDir)DvalinUnity\Packages\Dvalin\"
-xcopy /y /s "$(PluginsDir)..\core\BepInEx.Harmony.dll" "$(SolutionDir)DvalinUnity\Packages\Dvalin\"
-
 if $(CopyToPlugins)==true xcopy /y /s "$(SolutionDir)dist\" "$(PluginsDir)$(SolutionName)\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

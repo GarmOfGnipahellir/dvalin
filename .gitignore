@@ -1,5 +1,8 @@
 # Dvalin specific
-/[Dd]ist/
+[Dd]ist/*
+![Dd]ist/icon.png
+![Dd]ist/README.md
+![Dd]ist/manifest.json
 
 # VSCode specific
 /.vscode/

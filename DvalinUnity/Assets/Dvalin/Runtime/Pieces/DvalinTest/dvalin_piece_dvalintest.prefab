@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 4388099226121195690}
   - component: {fileID: 1090741641237892825}
   m_Layer: 10
-  m_Name: piece_dvalintest
+  m_Name: dvalin_piece_dvalintest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,16 +249,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6367665982888988091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2094620348, guid: 35d991d936f889045a028998996835d4, type: 3}
+  m_Script: {fileID: 2094620348, guid: 01b5845124e3874469297fdc1064dad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_primaryTarget: 0
   m_randomTarget: 1
   m_icon: {fileID: 21300000, guid: 87601c64f9e683248b9ce5dae709928a, type: 3}
-  m_name: $piece_dvalintest
-  m_description: $piece_dvalintest_description
+  m_name: $dvalin_piece_dvalintest
+  m_description: $dvalin_piece_dvalintest
   m_enabled: 1
-  m_category: 100
+  m_category: 0
   m_isUpgrade: 0
   m_comfort: 0
   m_comfortGroup: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6367665982888988091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1521249158, guid: 35d991d936f889045a028998996835d4, type: 3}
+  m_Script: {fileID: 1521249158, guid: 01b5845124e3874469297fdc1064dad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_persistent: 1

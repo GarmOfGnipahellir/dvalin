@@ -1,7 +1,7 @@
 # Dvalin specific
 /[Aa]sset[Bb]undles/
-/[Pp]ackages/Dvalin/*.dll
-/[Pp]ackages/Valheim/*.dll
+
+/[Aa]ssets/[Vv]alheim
 
 # VSCode specific
 /.vscode/
