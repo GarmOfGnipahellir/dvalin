@@ -12,8 +12,6 @@ namespace Dvalin.API
         private DvalinPiece(Piece prefab)
         {
             Prefab = prefab;
-
-            DvalinLogger.LogInfoFormat("Created piece with: {0}", prefab);
         }
 
         public static bool TryCreate(string pieceName, out DvalinPiece dvalinPiece)

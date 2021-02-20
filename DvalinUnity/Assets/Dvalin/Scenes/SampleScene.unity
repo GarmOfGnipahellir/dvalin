@@ -289,13 +289,19 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.4910146, y: -0, z: -0, w: 0.87115145}
+  m_LocalPosition: {x: 0, y: 3.17, z: 3.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 58.815002, y: 0, z: 0}
+--- !u!23 &1532744699 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 458551589166437757, guid: 4dab4f068d57b154cb689da39c3b1367,
+    type: 3}
+  m_PrefabInstance: {fileID: 3974704163863780427}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3974704163863780427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,11 +309,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3974704162959458598, guid: 4dab4f068d57b154cb689da39c3b1367,
+    - target: {fileID: 2301877270631027593, guid: 4dab4f068d57b154cb689da39c3b1367,
         type: 3}
-      propertyPath: m_Name
-      value: New
-      objectReference: {fileID: 0}
+      propertyPath: mapMesh
+      value: 
+      objectReference: {fileID: 1532744699}
     - target: {fileID: 3974704164427088048, guid: 4dab4f068d57b154cb689da39c3b1367,
         type: 3}
       propertyPath: m_Name
