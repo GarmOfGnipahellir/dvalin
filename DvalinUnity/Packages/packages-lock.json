@@ -73,6 +73,18 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
+    "dvalin": {
+      "version": "file:Dvalin",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "valheim": {
+      "version": "file:Valheim",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

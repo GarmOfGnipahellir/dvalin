@@ -1,5 +1,10 @@
 # Dvalin specific
 /[Aa]sset[Bb]undles/
+/[Pp]ackages/Dvalin/*.dll
+/[Pp]ackages/Valheim/*.dll
+
+# VSCode specific
+/.vscode/
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #

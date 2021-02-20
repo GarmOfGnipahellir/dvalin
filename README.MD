@@ -46,3 +46,8 @@ Also if you wan't to build with VSCode you can base your task on this:
     ]
 }
 ```
+
+### Unity
+
+Unity needs all the Valheim and Dvalin assemblies imported to build.  
+Put these in each respective package.
