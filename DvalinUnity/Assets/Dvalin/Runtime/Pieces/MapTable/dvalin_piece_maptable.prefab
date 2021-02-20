@@ -335,7 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_primaryTarget: 0
   m_randomTarget: 1
-  m_icon: {fileID: 21300000, guid: 87601c64f9e683248b9ce5dae709928a, type: 3}
+  m_icon: {fileID: 21300000, guid: 5bb560c2179c98f41be5d2c8eca942a9, type: 3}
   m_name: $piece_dvalin_maptable
   m_description: $piece_dvalin_maptable_description
   m_enabled: 1

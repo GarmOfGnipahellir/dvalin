@@ -15,7 +15,7 @@ namespace Dvalin.Core
     {
         public const string PLUGIN_GUID = "com.garm.dvalin";
         public const string PLUGIN_NAME = "Dvalin";
-        public const string PLUGIN_VERSION = "0.1.0";
+        public const string PLUGIN_VERSION = "0.1.1";
 
         private Harmony m_harmony;
         private readonly List<IDvalinDestroyable> m_destroyables = new List<IDvalinDestroyable>();

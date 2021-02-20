@@ -66,7 +66,7 @@
             fixed4 forestMask = tex2D(_ForestMaskTex, IN.uv_MainTex);
             col = lerp(col, forest, forestMask.r * forest.a);
 
-            fixed4 height = tex2D(_HeightTex, IN.uv_MainTex) * 12.5; // adjusted height values for dev
+            fixed4 height = tex2D(_HeightTex, IN.uv_MainTex);// * 12.5; // adjusted height values for dev
             float waterMask = step(height.r, _WaterLevel);
 
             float shoreMask = clamp((height.r - _WaterLevel) * 0.5, 0, 1);

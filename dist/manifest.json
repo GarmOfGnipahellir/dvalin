@@ -1,9 +1,7 @@
 {
-    "name": "MapTable_Dvalin",
-    "version_number": "1.1.0",
-    "website_url": "https://github.com/thunderstore-io",
-    "description": "This is a description for a mod. 250 characters max",
-    "dependencies": [
-        "MythicManiac-TestMod-1.1.0"
-    ]
+  "name": "MapTable_Dvalin",
+  "version_number": "0.1.1",
+  "website_url": "https://github.com/GarmOfGnipahellir/dvalin",
+  "description": "Adds a map table that shows your map.",
+  "dependencies": []
 }
