@@ -33,8 +33,10 @@ namespace Dvalin.Core
 
             m_destroyables.Add(new DvalinLogger());
             m_destroyables.Add(new DvalinLocalization());
-
+            
+            #if DEBUG
             RegisterPiece("piece_dvalintest");
+            #endif
             RegisterPiece("piece_dvalin_maptable");
 
             ZNetSceneAwake.PrefixEvent += AddCustomPrefabs;
