@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 3974704164427088053}
   - component: {fileID: 3974704164427088054}
   - component: {fileID: 2301877270631027593}
+  - component: {fileID: 1783849656608593613}
   m_Layer: 10
   m_Name: dvalin_piece_maptable
   m_TagString: Untagged
@@ -396,13 +397,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8daf774bd00e182409ccaaadd0e30894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapMesh: {fileID: 458551589166437757}
-  mapMaterial: {fileID: 2100000, guid: a6f11c67b4db4a64e8004f5cf9d385cb, type: 2}
-  forestMaskTexture: {fileID: 0}
-  mapTexture: {fileID: 0}
-  heightTexture: {fileID: 0}
-  fogTexture: {fileID: 0}
-  currentTexture: 0
+  m_mapMesh: {fileID: 458551589166437757}
+  m_mapMaterial: {fileID: 2100000, guid: a6f11c67b4db4a64e8004f5cf9d385cb, type: 2}
+  m_forestMaskTexture: {fileID: 0}
+  m_mapTexture: {fileID: 0}
+  m_heightTexture: {fileID: 0}
+  m_fogTexture: {fileID: 0}
+  m_explored: 
+  m_nview: {fileID: 0}
+--- !u!114 &1783849656608593613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974704164427088048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1863081269, guid: 01b5845124e3874469297fdc1064dad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_hoverText: Update Map
+  m_name: updateMap
+  m_holdRepeatInterval: -1
 --- !u!1 &4868464700608381489
 GameObject:
   m_ObjectHideFlags: 0
