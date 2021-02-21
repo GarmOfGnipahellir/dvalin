@@ -14,7 +14,7 @@
         _ForestMaskTex ("ForestMaskTexture", 2D) = "white" {}
         _BackgroundTex ("BackgroundTexture", 2D) = "white" {}
         _ForestTex ("ForestTexture", 2D) = "white" {}
-        _WaterLevel ("WaterLevel", Float) = 4.7
+        _WaterLevel ("WaterLevel", Float) = 0.58
         _ShoreColor ("ShoreColor", Color) = (0, 0, 0, 0)
         _ShallowWaterColor ("ShallowWaterColor", Color) = (0, 0, 0, 0)
         _DeepWaterColor ("DeepWaterColor", Color) = (0, 0, 0, 0)
@@ -43,7 +43,7 @@
         sampler2D _ForestMaskTex;
         sampler2D _BackgroundTex;
         sampler2D _ForestTex;
-        // float _WaterLevel;
+        float _WaterLevel;
         float4 _ShoreColor;
         float4 _ShallowWaterColor;
         float4 _DeepWaterColor;
@@ -56,10 +56,6 @@
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             fixed4 background = tex2D(_BackgroundTex, IN.uv_MainTex * 1);
-
-            // float _WaterLevel = sin(_Time * 10) * 50 + 50;
-            float _WaterLevel = _Color.r * 100;
-            float _Fog = _Color.g;
 
             fixed4 forest = tex2D(_ForestTex, IN.uv_MainTex * 100);
             fixed4 col = tex2D(_MainTex, IN.uv_MainTex);
@@ -81,9 +77,8 @@
 
             fixed4 fog = tex2D(_FogTex, IN.uv_MainTex);
             fixed3 final = lerp(explored, background, fog.r * _Fog);
-            // final = explored;
 
-            o.Albedo = final;
+            o.Albedo = final * _Color;
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = 1;

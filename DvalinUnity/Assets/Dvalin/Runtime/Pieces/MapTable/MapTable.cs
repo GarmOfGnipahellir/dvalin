@@ -70,20 +70,27 @@ public class MapTable : MonoBehaviour
         m_fogTexture.wrapMode = TextureWrapMode.Clamp;
         UpdateFogTexture();
 
+        var prevMat = m_mapMesh.materials[0];
+        var northMaterial = new Material(Shader.Find("Custom/Piece"));
+        northMaterial.SetTexture("_MainTex", null);
+        northMaterial.SetTexture("_BumpMap", null);
+        northMaterial.SetFloat("_Glossiness", prevMat.GetFloat("_Glossiness"));
+        northMaterial.SetColor("_Color", prevMat.GetColor("_Color"));
+
         var instMapMaterial = new Material(m_mapMaterial);
         instMapMaterial.SetTexture("_MainTex", m_mapTexture);
         instMapMaterial.SetTexture("_HeightTex", m_heightTexture);
         instMapMaterial.SetTexture("_FogTex", m_fogTexture);
         instMapMaterial.SetTexture("_MaskTex", m_forestMaskTexture);
-        instMapMaterial.SetFloat("_WaterLevel", m_mapMaterial.GetFloat("_WaterLevel") * 10);
+        instMapMaterial.SetFloat("_WaterLevel", ZoneSystem.instance.m_waterLevel);
 
-        var prevMat = m_mapMesh.materials[1];
-        var instPieceMaterial = new Material(Shader.Find("Custom/Piece"));
-        instPieceMaterial.SetTexture("_MainTex", prevMat.GetTexture("_MainTex"));
-        instPieceMaterial.SetTexture("_BumpMap", prevMat.GetTexture("_BumpMap"));
-        instPieceMaterial.SetFloat("_Glossiness", prevMat.GetFloat("_Glossiness"));
+        prevMat = m_mapMesh.materials[2];
+        var woodMaterial = new Material(Shader.Find("Custom/Piece"));
+        woodMaterial.SetTexture("_MainTex", prevMat.GetTexture("_MainTex"));
+        woodMaterial.SetTexture("_BumpMap", prevMat.GetTexture("_BumpMap"));
+        woodMaterial.SetFloat("_Glossiness", prevMat.GetFloat("_Glossiness"));
 
-        m_mapMesh.materials = new[] { instMapMaterial, instPieceMaterial };
+        m_mapMesh.materials = new[] { northMaterial, instMapMaterial, woodMaterial };
     }
 
     bool UpdateMap(Switch sw, Humanoid user, ItemDrop.ItemData item)

@@ -80,7 +80,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Fog: 0
+    - _Fog: 1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -93,10 +93,10 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterLevel: 4.65
+    - _WaterLevel: 0.58
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.58, g: 1, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DeepWaterColor: {r: 0.36105883, g: 0.36105883, b: 0.43137255, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShallowWaterColor: {r: 0.574, g: 0.50709206, b: 0.47892025, a: 0}
