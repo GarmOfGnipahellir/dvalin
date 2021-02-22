@@ -1,8 +1,14 @@
 {
+  "name": "MapTable_Dvalin",
+  "version_number": "0.2.0",
+  "website_url": "https://github.com/GarmOfGnipahellir/dvalin",
+  "description": "Adds a map table that shows your map.",
+  "dependencies": [],
+
   "ManifestVersion": 2,
   "AuthorName": "GarmOfGnipahellir",
   "Name": "GarmOfGnipahellir-MapTable_Dvalin",
-  "DisplayName": "Map Table",
+  "DisplayName": "MapTable Dvalin",
   "Version": "0.2.0",
   "Licence": "",
   "WebsiteURL": "https://github.com/GarmOfGnipahellir/dvalin",
@@ -14,8 +20,6 @@
   "NetworkMode": "both",
   "PackageType": "mod",
   "InstallMode": "managed",
-  "Loaders": [
-      "bepinex"
-  ],
+  "Loaders": ["bepinex"],
   "ExtraData": {}
 }
