@@ -1,7 +1,21 @@
 {
-  "name": "MapTable_Dvalin",
-  "version_number": "0.1.1",
-  "website_url": "https://github.com/GarmOfGnipahellir/dvalin",
-  "description": "Adds a map table that shows your map.",
-  "dependencies": []
+  "ManifestVersion": 2,
+  "AuthorName": "Garm",
+  "Name": "Garm-Dvalin-MapTable",
+  "DisplayName": "Map Table",
+  "Version": "0.2.0",
+  "Licence": "",
+  "WebsiteURL": "https://github.com/GarmOfGnipahellir/dvalin",
+  "Description": "Adds a map table that shows your map.",
+  "GameVersion": "N/A",
+  "Dependencies": [],
+  "OptionalDependencies": [],
+  "Incompatibilities": [],
+  "NetworkMode": "both",
+  "PackageType": "mod",
+  "InstallMode": "managed",
+  "Loaders": [
+      "bepinex"
+  ],
+  "ExtraData": {}
 }
