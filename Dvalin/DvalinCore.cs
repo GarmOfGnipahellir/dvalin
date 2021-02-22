@@ -21,7 +21,7 @@ namespace Dvalin.Core
         private readonly List<IDvalinDestroyable> m_destroyables = new List<IDvalinDestroyable>();
         private readonly List<DvalinPiece> m_pieces = new List<DvalinPiece>();
 
-        public static string PluginDir { get { return Path.Combine(Paths.PluginPath, PLUGIN_NAME); } }
+        public static string PluginDir { get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); } }
 
         void Awake()
         {
@@ -33,10 +33,10 @@ namespace Dvalin.Core
 
             m_destroyables.Add(new DvalinLogger());
             m_destroyables.Add(new DvalinLocalization());
-            
-            #if DEBUG
+
+#if DEBUG
             RegisterPiece("dvalin_piece_dvalintest");
-            #endif
+#endif
             RegisterPiece("dvalin_piece_maptable");
 
             ZNetSceneAwake.PrefixEvent += AddCustomPrefabs;
