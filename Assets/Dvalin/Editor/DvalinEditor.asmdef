@@ -1,0 +1,17 @@
+{
+    "name": "DvalinEditor",
+    "references": [
+        "GUID:7aad3aff600ac2541816dfef6d48bbb8"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
