@@ -3,7 +3,8 @@
 /[Dd]ist/
 
 # Packages are WIP for now or not distributed
-/[Pp]ackages/**/
+[Pp]ackages/*
+![Pp]ackages/[Dd]valin
 
 # VSCode specific
 /.vscode/

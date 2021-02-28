@@ -90,6 +90,12 @@
       "source": "embedded",
       "dependencies": {}
     },
+    "dvalin": {
+      "version": "file:dvalin",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "valheim": {
       "version": "file:valheim",
       "depth": 0,

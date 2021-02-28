@@ -383,12 +383,10 @@ MonoBehaviour:
   m_repairPiece: 0
   m_canBeRemoved: 1
   m_onlyInBiome: 0
-  m_placeEffect:
-    m_effectPrefabs: []
   m_dlc: 
   m_craftingStation: {fileID: 0}
-  m_resources: []
   m_destroyedLootPrefab: {fileID: 0}
+  m_includeInRealease: 1
 --- !u!114 &3974704164427088054
 MonoBehaviour:
   m_ObjectHideFlags: 0
