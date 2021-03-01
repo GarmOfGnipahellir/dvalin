@@ -1,7 +1,8 @@
 {
     "name": "DvalinEditor",
     "references": [
-        "GUID:7aad3aff600ac2541816dfef6d48bbb8"
+        "GUID:7aad3aff600ac2541816dfef6d48bbb8",
+        "GUID:49818357e697641afb75d2f8acaf1861"
     ],
     "includePlatforms": [
         "Editor"

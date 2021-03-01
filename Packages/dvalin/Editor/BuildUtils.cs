@@ -1,7 +1,10 @@
 ﻿using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.Compilation;
+using UnityEditor.SettingsManagement;
 
 namespace Dvalin.Editor
 {
@@ -10,19 +13,34 @@ namespace Dvalin.Editor
         /// <summary>
         /// Absolute path to ProjectRoot/Dist.
         /// </summary>
-        public static readonly string DIST_DIR = Path.Combine(Application.dataPath, "..", "Dist");
+        public static readonly string k_DistDir = Path.Combine(Application.dataPath, "..", "Dist");
+
+        private static readonly string[] k_IgnoredAssemblies = {
+            "UnityEngine.TestRunner",
+            "UnityEngine.UI",
+            "Unity.TextMeshPro",
+            "Unity.Timeline"
+        };
+
+        [UserSettingAttribute("Build", "BepInEx Plugins Dir")]
+        public static UserSetting<string> m_BepInExPluginsDir = new UserSetting<string>(
+            DvalinSettings.instance, "BepInExPluginsDir", "", SettingsScope.User
+        );
 
         /// <summary>
-        /// Deletes <see cref="DIST_DIR" /> and runs: 
+        /// Deletes <see cref="k_DistDir" /> and runs: 
         /// <see cref="BuildRuntimeAssembly" />,
         /// <see cref="BuildAssetBundles" />
         /// </summary>
         [MenuItem("Dvalin/Build All")]
         public static void BuildAll()
         {
-            Directory.Delete(DIST_DIR, true);
+            if (Directory.Exists(k_DistDir))
+            {
+                Directory.Delete(k_DistDir, true);
+            }
 
-            BuildRuntimeAssembly();
+            BuildRuntimeAssemblies();
             BuildAssetBundles();
 
             CreateManifest();
@@ -31,11 +49,16 @@ namespace Dvalin.Editor
         }
 
         /// <summary>
-        /// Builds the plugin dll and puts it in <see cref="DIST_DIR" />. 
+        /// Builds the required dlls and puts them in <see cref="k_DistDir" />. 
         /// </summary>
-        [MenuItem("Dvalin/Build Runtime Assembly")]
-        public static void BuildRuntimeAssembly()
+        // [MenuItem("Dvalin/Build Runtime Assemblies")]
+        public static void BuildRuntimeAssemblies()
         {
+            Assembly[] playerAssemblies = CompilationPipeline
+                .GetAssemblies(AssembliesType.PlayerWithoutTestAssemblies)
+                .Where(x => !k_IgnoredAssemblies.Contains(x.name))
+                .ToArray();
+
             string stageDirName = "Build";
             string projectRootDir = Path.Combine(Application.dataPath, "..");
             string stagePath = Path.Combine(projectRootDir, stageDirName);
@@ -47,16 +70,20 @@ namespace Dvalin.Editor
             BuildPipeline.BuildPlayer(options);
 
             string distDir = CreateDistDirectory();
-            File.Copy(
-                Path.Combine(stagePath, "Dvalin_Data", "Managed", "Dvalin.dll"),
-                Path.Combine(distDir, "Dvalin.dll")
-            );
+            foreach (var assembly in playerAssemblies)
+            {
+                File.Copy(
+                    Path.Combine(stagePath, "Dvalin_Data", "Managed", assembly.name + ".dll"),
+                    Path.Combine(distDir, assembly.name + ".dll"),
+                    true
+                );
+            }
         }
 
         /// <summary>
-        /// Builds asset bundles and puts them in <see cref="DIST_DIR" />.
+        /// Builds asset bundles and puts them in <see cref="k_DistDir" />.
         /// </summary>
-        [MenuItem("Dvalin/Build Asset Bundles")]
+        // [MenuItem("Dvalin/Build Asset Bundles")]
         public static void BuildAssetBundles()
         {
             string stageDirName = "AssetBundles";
@@ -89,25 +116,31 @@ namespace Dvalin.Editor
         }
 
         /// <summary>
-        /// Creates the <see cref="DIST_DIR" /> folder if it doesn't already exist.
+        /// Creates the <see cref="k_DistDir" /> folder if it doesn't already exist.
         /// </summary>
-        /// <returns><see cref="DIST_DIR" /></returns>
+        /// <returns><see cref="k_DistDir" /></returns>
         public static string CreateDistDirectory()
         {
-            Directory.CreateDirectory(DIST_DIR);
-            return DIST_DIR;
+            Directory.CreateDirectory(k_DistDir);
+            return k_DistDir;
         }
 
         /// <summary>
-        /// Copies everything in the <see cref="DIST_DIR" /> folder to the BepInEx/plugin folder.
+        /// Copies everything in the <see cref="k_DistDir" /> folder to the BepInEx/plugin folder.
         /// </summary>
         public static void CopyDistToPlugins()
         {
-            // TODO implement dir copy
-            foreach (var file in Directory.EnumerateFiles(DIST_DIR))
+            string pluginDir = Path.Combine(m_BepInExPluginsDir, "Dvalin");
+            if (Directory.Exists(pluginDir))
+            {
+                Directory.Delete(pluginDir, true);
+            }
+            Directory.CreateDirectory(pluginDir);
+
+            foreach (var file in Directory.EnumerateFiles(k_DistDir))
             {
                 string fileName = Path.GetFileName(file);
-                File.Copy(file, Path.Combine(@"D:\Programs\r2modman\data\Valheim\profiles\Dvalin Test\BepInEx\plugins\Dvalin", fileName), true);
+                File.Copy(file, Path.Combine(pluginDir, fileName), true);
             }
         }
     }
@@ -142,14 +175,14 @@ namespace Dvalin.Editor
         public static ThunderStoreManifest FromPlugin()
         {
             var result = new ThunderStoreManifest();
-            result.name = Plugin.NAME.Replace(' ', '_');
-            result.version_number = result.Version = Plugin.VERSION;
-            result.website_url = result.WebsiteURL = Plugin.WEBSITE_URL;
-            result.description = result.Description = Plugin.DESCRIPTION;
-            result.dependencies = result.Dependencies = Plugin.DEPENDENCIES;
-            result.AuthorName = Plugin.AUTHOR;
-            result.Name = string.Format("{0}-{1}", Plugin.AUTHOR, Plugin.NAME.Replace(' ', '_'));
-            result.DisplayName = Plugin.NAME;
+            result.name = Plugin.k_Name.Replace(' ', '_');
+            result.version_number = result.Version = Plugin.k_Version;
+            result.website_url = result.WebsiteURL = Plugin.k_WebsiteUrl;
+            result.description = result.Description = Plugin.k_Description;
+            result.dependencies = result.Dependencies = Plugin.k_Dependencies;
+            result.AuthorName = Plugin.k_Author;
+            result.Name = string.Format("{0}-{1}", Plugin.k_Author, Plugin.k_Name.Replace(' ', '_'));
+            result.DisplayName = Plugin.k_Name;
             return result;
         }
 

@@ -17,7 +17,7 @@ namespace Dvalin.Tests
             var manifest = new ThunderStoreManifest();
 
             using (var stream = File.OpenRead(
-                    Path.Combine(BuildUtils.DIST_DIR, "manifest.json")))
+                    Path.Combine(BuildUtils.k_DistDir, "manifest.json")))
             {
                 using (var reader = new StreamReader(stream))
                 {

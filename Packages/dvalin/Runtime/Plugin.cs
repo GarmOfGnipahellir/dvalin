@@ -6,40 +6,42 @@ using HarmonyLib;
 
 namespace Dvalin
 {
-    [BepInPlugin(GUID, NAME, VERSION)]
+    [BepInPlugin(k_Guid, k_Name, k_Version)]
     [BepInProcess("valheim.exe")]
     public class Plugin : BaseUnityPlugin
     {
-        public const string AUTHOR = "GarmOfGnipahellir";
-        public const string GUID = "com.garmofgnipahellir.dvalin";
-        public const string NAME = "Dvalin";
-        public const string VERSION = "0.3.0";
-        public const string DESCRIPTION = "Will be filled out later...";
-        public const string WEBSITE_URL = "https://github.com/GarmOfGnipahellir/dvalin";
-        public static readonly string[] DEPENDENCIES = { "denikson-BepInExPack_Valheim" };
+        public const string k_Author = "GarmOfGnipahellir";
+        public const string k_Guid = "com.garmofgnipahellir.dvalin";
+        public const string k_Name = "Dvalin";
+        public const string k_Version = "0.3.0";
+        public const string k_Description = "Will be filled out later...";
+        public const string k_WebsiteUrl = "https://github.com/GarmOfGnipahellir/dvalin";
+        public static readonly string[] k_Dependencies = { "denikson-BepInExPack_Valheim" };
 
-        private Harmony m_harmony;
-        private ContentLoader m_contentLoader;
-        private readonly List<IDestroyable> m_destroyables = new List<IDestroyable>();
-        private ContentInfo m_contentInfo;
+        private Harmony m_Harmony;
+        private ContentLoader m_ContentLoader;
+        private readonly List<IDestroyable> m_Destroyables = new List<IDestroyable>();
+        private ContentInfo m_ContentInfo;
 
-        public static Paths Paths { get; protected set; }
+        public static Paths paths { get; protected set; }
 
         void Awake()
         {
             Logger.LogInfo(Path.GetFullPath("AssetBundles"));
 
-            Paths = new Paths();
+            paths = new Paths();
 
-            m_harmony = new Harmony(GUID);
-            m_harmony.PatchAll();
+            m_Harmony = new Harmony(k_Guid);
+            m_Harmony.PatchAll();
 
-            m_destroyables.Add(new Logger());
+            m_Destroyables.Add(new Logger());
 
-            m_destroyables.Add(m_contentLoader = new ContentLoader(Paths));
-            m_contentInfo = m_contentLoader.Load();
+            LoadOtherAssemblies();
 
-            m_destroyables.Add(new Localization(m_contentInfo.Localization));
+            m_Destroyables.Add(m_ContentLoader = new ContentLoader(paths));
+            m_ContentInfo = m_ContentLoader.Load();
+
+            m_Destroyables.Add(new Localization(m_ContentInfo.Localization));
 
             Patches.ZNetScene.Awake.PrefixEvent += AddCustomPrefabs;
             Patches.Player.OnSpawned.PostfixEvent += ModifyPieceTables;
@@ -51,22 +53,32 @@ namespace Dvalin
         {
             Dvalin.Logger.LogInfo("Destroying plugin.");
 
-            foreach (var pieceInfo in m_contentInfo.Pieces)
+            foreach (var pieceInfo in m_ContentInfo.Pieces)
             {
                 pieceInfo.Destroy();
             }
 
-            m_harmony.UnpatchSelf();
+            m_Harmony.UnpatchSelf();
 
-            foreach (var destroyable in m_destroyables)
+            foreach (var destroyable in m_Destroyables)
             {
                 destroyable.Destroy();
             }
         }
 
+        private void LoadOtherAssemblies()
+        {
+            var dllFiles = Directory.EnumerateFiles(paths.PluginDir, "*.dll");
+            foreach (var dllFile in dllFiles)
+            {
+                if (dllFile == Assembly.GetExecutingAssembly().Location) continue;
+                Assembly.LoadFile(dllFile);
+            }
+        }
+
         private void AddCustomPrefabs(ZNetScene nscene)
         {
-            foreach (var pieceInfo in m_contentInfo.Pieces)
+            foreach (var pieceInfo in m_ContentInfo.Pieces)
             {
                 nscene.m_prefabs.Add(pieceInfo.Prefab.gameObject);
 
@@ -78,7 +90,7 @@ namespace Dvalin
 
         private void ModifyPieceTables(Player player)
         {
-            foreach (var pieceInfo in m_contentInfo.Pieces)
+            foreach (var pieceInfo in m_ContentInfo.Pieces)
             {
                 pieceInfo.AddToTable(player);
             }
