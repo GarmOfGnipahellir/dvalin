@@ -22,15 +22,22 @@ namespace Dvalin.Editor
             "Unity.Timeline"
         };
 
-        [UserSettingAttribute("Build", "BepInEx Plugins Dir")]
+        [UserSettingAttribute("User Settings", "Copy Dist to Plugins", "Copy build output to BepInEx plugins directory.")]
+        public static UserSetting<bool> m_CopyDistToPlugins = new UserSetting<bool>(
+            DvalinSettings.instance, "CopyDistToPlugins", false, SettingsScope.User
+        );
+
+        [UserSettingAttribute("User Settings", "Plugins Path", "Path to BepInEx plugins directory.")]
         public static UserSetting<string> m_BepInExPluginsDir = new UserSetting<string>(
             DvalinSettings.instance, "BepInExPluginsDir", "", SettingsScope.User
         );
 
         /// <summary>
         /// Deletes <see cref="k_DistDir" /> and runs: 
-        /// <see cref="BuildRuntimeAssembly" />,
-        /// <see cref="BuildAssetBundles" />
+        /// <see cref="BuildRuntimeAssemblies" />,
+        /// <see cref="BuildAssetBundles" />,
+        /// <see cref="CreateManifest" />,
+        /// <see cref="CopyDistToPlugins" /> (optional)
         /// </summary>
         [MenuItem("Dvalin/Build All")]
         public static void BuildAll()
@@ -45,7 +52,10 @@ namespace Dvalin.Editor
 
             CreateManifest();
 
-            CopyDistToPlugins();
+            if (m_CopyDistToPlugins)
+            {
+                CopyDistToPlugins();
+            }
         }
 
         /// <summary>
