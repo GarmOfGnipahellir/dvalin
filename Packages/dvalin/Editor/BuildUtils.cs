@@ -113,7 +113,7 @@ namespace Dvalin.Editor
         public static void CreateManifest()
         {
             string distDir = CreateDistDirectory();
-            var manifest = ThunderStoreManifest.FromPlugin();
+            var manifest = new ThunderStoreManifest();
 
             var json = EditorJsonUtility.ToJson(manifest, true);
             using (var stream = File.OpenWrite(Path.Combine(distDir, "manifest.json")))
@@ -182,18 +182,15 @@ namespace Dvalin.Editor
         public string[] Loaders = { "bepinex" };
         public ManifestExtraData ExtraData = new ManifestExtraData();
 
-        public static ThunderStoreManifest FromPlugin()
+        public ThunderStoreManifest()
         {
-            var result = new ThunderStoreManifest();
-            result.name = Plugin.k_Name.Replace(' ', '_');
-            result.version_number = result.Version = Plugin.k_Version;
-            result.website_url = result.WebsiteURL = Plugin.k_WebsiteUrl;
-            result.description = result.Description = Plugin.k_Description;
-            result.dependencies = result.Dependencies = Plugin.k_Dependencies;
-            result.AuthorName = Plugin.k_Author;
-            result.Name = string.Format("{0}-{1}", Plugin.k_Author, Plugin.k_Name.Replace(' ', '_'));
-            result.DisplayName = Plugin.k_Name;
-            return result;
+            name = Application.productName.Replace(' ', '_');
+            version_number = Version = Application.version;
+            website_url = WebsiteURL = Plugin.k_WebsiteUrl;
+            dependencies = Dependencies = Plugin.k_Dependencies;
+            AuthorName = Application.companyName;
+            Name = string.Format("{0}-{1}", AuthorName, name);
+            DisplayName = Application.productName;
         }
 
         [System.Serializable]
