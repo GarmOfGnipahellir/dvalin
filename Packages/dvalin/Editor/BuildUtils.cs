@@ -23,13 +23,13 @@ namespace Dvalin.Editor
         };
 
         [UserSettingAttribute("User Settings", "Copy Dist to Plugins", "Copy build output to BepInEx plugins directory.")]
-        public static UserSetting<bool> m_CopyDistToPlugins = new UserSetting<bool>(
-            DvalinSettings.instance, "CopyDistToPlugins", false, SettingsScope.User
+        public static UserSetting<bool> m_CopyDistToPlugins = DvalinSettings.UserSetting(
+            "CopyDistToPlugins", false
         );
 
         [UserSettingAttribute("User Settings", "Plugins Path", "Path to BepInEx plugins directory.")]
-        public static UserSetting<string> m_BepInExPluginsDir = new UserSetting<string>(
-            DvalinSettings.instance, "BepInExPluginsDir", "", SettingsScope.User
+        public static UserSetting<string> m_BepInExPluginsDir = DvalinSettings.UserSetting(
+            "BepInExPluginsDir", ""
         );
 
         /// <summary>
@@ -51,6 +51,12 @@ namespace Dvalin.Editor
             BuildAssetBundles();
 
             CreateManifest();
+
+            var iconPath = AssetDatabase.GetAssetPath(ModInfo.icon);
+            File.Copy(iconPath, Path.Combine(k_DistDir, "icon.png"));
+
+            var readmePath = AssetDatabase.GetAssetPath(ModInfo.readme);
+            File.Copy(readmePath, Path.Combine(k_DistDir, "README.MD"));
 
             if (m_CopyDistToPlugins)
             {
@@ -162,7 +168,7 @@ namespace Dvalin.Editor
         public string version_number = "0.0.0";
         public string website_url = "";
         public string description = "";
-        public string[] dependencies = new string[0];
+        public string[] dependencies = { "denikson-BepInExPack_Valheim" };
 
         public int ManifestVersion = 2;
         public string AuthorName = "Unknown";
@@ -173,7 +179,7 @@ namespace Dvalin.Editor
         public string WebsiteURL = "";
         public string Description = "";
         public string GameVersion = "0.0.0";
-        public string[] Dependencies = { };
+        public string[] Dependencies = { "denikson-BepInExPack_Valheim" };
         public string[] OptionalDependencies = { };
         public string[] Incompatibilities = { };
         public string NetworkMode = "both";
@@ -184,13 +190,14 @@ namespace Dvalin.Editor
 
         public ThunderStoreManifest()
         {
-            name = Application.productName.Replace(' ', '_');
-            version_number = Version = Application.version;
-            website_url = WebsiteURL = Plugin.k_WebsiteUrl;
-            dependencies = Dependencies = Plugin.k_Dependencies;
-            AuthorName = Application.companyName;
+            name = ((string)ModInfo.name).Replace(' ', '_');
+            version_number = Version = ModInfo.version;
+            website_url = WebsiteURL = ModInfo.websiteUrl;
+            AuthorName = ModInfo.author;
             Name = string.Format("{0}-{1}", AuthorName, name);
-            DisplayName = Application.productName;
+            DisplayName = ModInfo.name;
+            Licence = ModInfo.licence;
+            description = Description = ModInfo.description;
         }
 
         [System.Serializable]
