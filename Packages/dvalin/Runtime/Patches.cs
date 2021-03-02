@@ -20,24 +20,6 @@ namespace Dvalin.Patches
         }
     }
 
-    namespace ZNetScene
-    {
-        [HarmonyPatch(typeof(global::ZNetScene), "Awake")]
-        class Awake
-        {
-            public delegate void PrefixHandler(global::ZNetScene zNetScene);
-
-            public static event PrefixHandler PrefixEvent;
-
-            static void Prefix(global::ZNetScene __instance)
-            {
-                Logger.LogInfoFormat("{0} awoken.", __instance);
-
-                PrefixEvent?.Invoke(__instance);
-            }
-        }
-    }
-
     namespace Localization
     {
         [HarmonyPatch(typeof(global::Localization), "SetupLanguage")]
@@ -74,6 +56,42 @@ namespace Dvalin.Patches
                 }
 
                 return failed;
+            }
+        }
+    }
+
+    namespace ZNetScene
+    {
+        [HarmonyPatch(typeof(global::ZNetScene), "Awake")]
+        class Awake
+        {
+            public delegate void PrefixHandler(global::ZNetScene nscene);
+
+            public static event PrefixHandler PrefixEvent;
+
+            static void Prefix(global::ZNetScene __instance)
+            {
+                Logger.LogInfoFormat("{0} awoken.", __instance);
+
+                PrefixEvent?.Invoke(__instance);
+            }
+        }
+    }
+
+    namespace ObjectDB
+    {
+        [HarmonyPatch(typeof(global::ObjectDB), "Awake")]
+        class Awake
+        {
+            public delegate void PrefixHandler(global::ObjectDB objectDb);
+
+            public static event PrefixHandler PrefixEvent;
+
+            static void Prefix(global::ObjectDB __instance)
+            {
+                Logger.LogInfoFormat("{0} awoken.", __instance);
+
+                PrefixEvent?.Invoke(__instance);
             }
         }
     }

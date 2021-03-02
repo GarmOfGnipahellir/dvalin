@@ -44,6 +44,7 @@ namespace Dvalin
             m_Destroyables.Add(new Localization(m_ContentInfo.Localization));
 
             Patches.ZNetScene.Awake.PrefixEvent += AddCustomPrefabs;
+            Patches.ObjectDB.Awake.PrefixEvent += AddCustomObjects;
             Patches.Player.OnSpawned.PostfixEvent += ModifyPieceTables;
 
             Dvalin.Logger.LogInfo("Plugin awoken.");
@@ -85,7 +86,26 @@ namespace Dvalin
                 Dvalin.Logger.LogInfoFormat("Added piece {0} to {1}", pieceInfo.Prefab, nscene);
             }
 
+            foreach (var itemInfo in m_ContentInfo.Items)
+            {
+                nscene.m_prefabs.Add(itemInfo.Prefab.gameObject);
+
+                Dvalin.Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, nscene);
+            }
+
             Dvalin.Logger.LogInfoFormat("Added Prefabs to {0}", nscene);
+        }
+
+        private void AddCustomObjects(ObjectDB objectDb)
+        {
+            foreach (var itemInfo in m_ContentInfo.Items)
+            {
+                objectDb.m_items.Add(itemInfo.Prefab.gameObject);
+
+                Dvalin.Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, objectDb);
+            }
+
+            Dvalin.Logger.LogInfoFormat("Added Prefabs to {0}", objectDb);
         }
 
         private void ModifyPieceTables(Player player)

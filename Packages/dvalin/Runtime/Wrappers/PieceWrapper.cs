@@ -9,6 +9,6 @@
     /// </remarks>
     public class PieceWrapper : Piece
     {
-        public bool m_includeInRealease = false;
+        public bool includeInRealease = false;
     }
 }

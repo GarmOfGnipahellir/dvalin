@@ -23,6 +23,7 @@ namespace Dvalin
         public ContentInfo Load()
         {
             List<PieceInfo> pieces = new List<PieceInfo>();
+            List<ItemInfo> items = new List<ItemInfo>();
             TextAsset localization = null;
 
             var mainBundle = AssetBundle.LoadFromFile(Path.Combine(m_paths.AssetBundleDir, "AssetBundles"));
@@ -36,9 +37,15 @@ namespace Dvalin
                 {
                     if (TryGetComponent<PieceWrapper>(prefab, out PieceWrapper piece))
                     {
-                        if (!Debug.isDebugBuild && !piece.m_includeInRealease) continue;
-                        
+                        if (!Debug.isDebugBuild && !piece.includeInRealease) continue;
+
                         pieces.Add(new PieceInfo(piece));
+                    }
+                    else if (TryGetComponent<ItemDropWrapper>(prefab, out ItemDropWrapper item))
+                    {
+                        if (!Debug.isDebugBuild && !item.includeInRealease) continue;
+
+                        items.Add(new ItemInfo(item));
                     }
                 }
 
@@ -55,7 +62,7 @@ namespace Dvalin
 
             mainBundle.Unload(false);
 
-            return new ContentInfo(pieces, localization);
+            return new ContentInfo(pieces, items, localization);
         }
 
         public static bool TryGetComponent<T>(GameObject gameObject, out T component)
