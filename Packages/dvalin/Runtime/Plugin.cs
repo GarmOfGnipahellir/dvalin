@@ -46,6 +46,7 @@ namespace Dvalin
             Patches.ZNetScene.Awake.PrefixEvent += AddCustomPrefabs;
             Patches.ObjectDB.Awake.PrefixEvent += AddCustomObjects;
             Patches.Player.OnSpawned.PostfixEvent += ModifyPieceTables;
+            Patches.Smelter.Awake.PostfixEvent += ModifySmelterItemConversions;
 
             Dvalin.Logger.LogInfo("Plugin awoken.");
         }
@@ -114,13 +115,8 @@ namespace Dvalin
                 for (int i = 0; i < recipe.m_resources.Length; i++)
                 {
                     var item = recipe.m_resources[i].m_resItem as ItemDropWrapper;
-                    if (item == null || !item.getFromRuntime) continue;
-
-                    var prefab = objectDb.GetItemPrefab(item.gameObject.name);
-                    if (prefab == null) continue;
-
-                    recipe.m_resources[i].m_resItem = prefab.GetComponent<ItemDrop>();
-                    UnityEngine.Object.Destroy(item.gameObject);
+                    if (item == null) continue;
+                    recipe.m_resources[i].m_resItem = WrapperToRuntime(item);
                 }
 
                 objectDb.m_recipes.Add(recipe);
@@ -137,6 +133,31 @@ namespace Dvalin
             {
                 pieceInfo.AddToTable(player);
             }
+        }
+
+        private void ModifySmelterItemConversions(Smelter smelter)
+        {
+            foreach (var smelterItemConversion in m_ContentInfo.SmelterItemConversions)
+            {
+                var itemConversion = new Smelter.ItemConversion();
+                itemConversion.m_from = WrapperToRuntime(smelterItemConversion.from);
+                itemConversion.m_to = WrapperToRuntime(smelterItemConversion.to);
+                smelter.m_conversion.Add(itemConversion);
+
+                Dvalin.Logger.LogInfoFormat("Added {0} -> {1} to {2}", itemConversion.m_from, itemConversion.m_to, smelter);
+            }
+
+            Dvalin.Logger.LogInfoFormat("Added item conversions to {0}", smelter);
+        }
+
+        private ItemDrop WrapperToRuntime(ItemDropWrapper wrapper)
+        {
+            if (!wrapper.getFromRuntime) return wrapper;
+
+            var prefab = ObjectDB.instance.GetItemPrefab(wrapper.gameObject.name);
+            if (prefab == null) return wrapper;
+
+            return prefab.GetComponent<ItemDrop>();
         }
     }
 }

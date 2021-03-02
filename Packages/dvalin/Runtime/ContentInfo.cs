@@ -8,17 +8,20 @@ namespace Dvalin
         public PieceInfo[] Pieces { get; protected set; }
         public ItemInfo[] Items { get; protected set; }
         public RecipeWrapper[] Recipes { get; protected set; }
+        public SmelterItemConversionWrapper[] SmelterItemConversions { get; protected set; }
         public TextAsset Localization { get; protected set; }
 
         public ContentInfo(
             List<PieceInfo> pieces,
             List<ItemInfo> items,
             List<RecipeWrapper> recipes,
+            List<SmelterItemConversionWrapper> smelterItemConversions,
             TextAsset localization)
         {
             Pieces = pieces.ToArray();
             Items = items.ToArray();
             Recipes = recipes.ToArray();
+            SmelterItemConversions = smelterItemConversions.ToArray();
             Localization = localization;
         }
     }

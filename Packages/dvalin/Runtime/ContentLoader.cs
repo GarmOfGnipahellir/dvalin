@@ -25,6 +25,7 @@ namespace Dvalin
             List<PieceInfo> pieces = new List<PieceInfo>();
             List<ItemInfo> items = new List<ItemInfo>();
             List<RecipeWrapper> recipes = new List<RecipeWrapper>();
+            List<SmelterItemConversionWrapper> smelterItemConversions = new List<SmelterItemConversionWrapper>();
             TextAsset localization = null;
 
             var mainBundle = AssetBundle.LoadFromFile(Path.Combine(m_paths.AssetBundleDir, "AssetBundles"));
@@ -57,6 +58,13 @@ namespace Dvalin
                     recipes.Add(recipe);
                 }
 
+                foreach (var smelterItemConversion in subBundle.LoadAllAssets<SmelterItemConversionWrapper>())
+                {
+                    if (!Debug.isDebugBuild && !smelterItemConversion.includeInRealease) continue;
+
+                    smelterItemConversions.Add(smelterItemConversion);
+                }
+
                 foreach (var textAsset in subBundle.LoadAllAssets<TextAsset>())
                 {
                     if (textAsset.name == "localization")
@@ -70,7 +78,7 @@ namespace Dvalin
 
             mainBundle.Unload(false);
 
-            return new ContentInfo(pieces, items, recipes, localization);
+            return new ContentInfo(pieces, items, recipes, smelterItemConversions, localization);
         }
 
         public static bool TryGetComponent<T>(GameObject gameObject, out T component)

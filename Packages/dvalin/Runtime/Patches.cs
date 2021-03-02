@@ -20,6 +20,22 @@ namespace Dvalin.Patches
         }
     }
 
+    namespace Smelter
+    {
+        [HarmonyPatch(typeof(global::Smelter), "Awake")]
+        class Awake
+        {
+            public delegate void PostfixHandler(global::Smelter smelter);
+
+            public static event PostfixHandler PostfixEvent;
+
+            static void Postfix(global::Smelter __instance)
+            {
+                PostfixEvent?.Invoke(__instance);
+            }
+        }
+    }
+
     namespace Localization
     {
         [HarmonyPatch(typeof(global::Localization), "SetupLanguage")]

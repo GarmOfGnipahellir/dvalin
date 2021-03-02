@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3603843309998353094}
   - component: {fileID: 539895477963861221}
   m_Layer: 0
-  m_Name: Copper
+  m_Name: Resin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
