@@ -88,6 +88,8 @@ namespace Dvalin
 
             foreach (var itemInfo in m_ContentInfo.Items)
             {
+                if (itemInfo == null || itemInfo.Prefab.getFromRuntime) continue;
+
                 nscene.m_prefabs.Add(itemInfo.Prefab.gameObject);
 
                 Dvalin.Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, nscene);
@@ -100,9 +102,30 @@ namespace Dvalin
         {
             foreach (var itemInfo in m_ContentInfo.Items)
             {
+                if (itemInfo.Prefab.getFromRuntime) continue;
+
                 objectDb.m_items.Add(itemInfo.Prefab.gameObject);
 
                 Dvalin.Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, objectDb);
+            }
+
+            foreach (var recipe in m_ContentInfo.Recipes)
+            {
+                for (int i = 0; i < recipe.m_resources.Length; i++)
+                {
+                    var item = recipe.m_resources[i].m_resItem as ItemDropWrapper;
+                    if (item == null || !item.getFromRuntime) continue;
+
+                    var prefab = objectDb.GetItemPrefab(item.gameObject.name);
+                    if (prefab == null) continue;
+
+                    recipe.m_resources[i].m_resItem = prefab.GetComponent<ItemDrop>();
+                    UnityEngine.Object.Destroy(item.gameObject);
+                }
+
+                objectDb.m_recipes.Add(recipe);
+
+                Dvalin.Logger.LogInfoFormat("Added recipe {0} to {1}", recipe, objectDb);
             }
 
             Dvalin.Logger.LogInfoFormat("Added Prefabs to {0}", objectDb);

@@ -24,6 +24,7 @@ namespace Dvalin
         {
             List<PieceInfo> pieces = new List<PieceInfo>();
             List<ItemInfo> items = new List<ItemInfo>();
+            List<RecipeWrapper> recipes = new List<RecipeWrapper>();
             TextAsset localization = null;
 
             var mainBundle = AssetBundle.LoadFromFile(Path.Combine(m_paths.AssetBundleDir, "AssetBundles"));
@@ -49,6 +50,13 @@ namespace Dvalin
                     }
                 }
 
+                foreach (var recipe in subBundle.LoadAllAssets<RecipeWrapper>())
+                {
+                    if (!Debug.isDebugBuild && !recipe.includeInRealease) continue;
+
+                    recipes.Add(recipe);
+                }
+
                 foreach (var textAsset in subBundle.LoadAllAssets<TextAsset>())
                 {
                     if (textAsset.name == "localization")
@@ -62,7 +70,7 @@ namespace Dvalin
 
             mainBundle.Unload(false);
 
-            return new ContentInfo(pieces, items, localization);
+            return new ContentInfo(pieces, items, recipes, localization);
         }
 
         public static bool TryGetComponent<T>(GameObject gameObject, out T component)

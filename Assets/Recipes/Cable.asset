@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7304436c28af94cb90bc08b9436e1f, type: 3}
   m_Name: Cable
   m_EditorClassIdentifier: 
-  m_item: {fileID: 0}
-  m_amount: 1
+  m_item: {fileID: 539895477963861221, guid: 9c1dbd28b53655a47bd552b4ff032774, type: 3}
+  m_amount: 10
   m_enabled: 1
   m_craftingStation: {fileID: 0}
   m_repairStation: {fileID: 0}
   m_minStationLevel: 1
   m_resources:
-  - m_resItem: {fileID: 0}
-    m_amount: 0
-    m_amountPerLevel: 0
-    m_recover: 0
-  - m_resItem: {fileID: 0}
-    m_amount: 0
-    m_amountPerLevel: 0
-    m_recover: 0
-  includeInRealease: 0
+  - m_resItem: {fileID: 539895477963861221, guid: 54c3e693c953aeb47af0f7d9a0f0100a,
+      type: 3}
+    m_amount: 1
+    m_amountPerLevel: 1
+    m_recover: 1
+  - m_resItem: {fileID: 539895477963861221, guid: 36ccd8fa51a76a447b50ebaefbb10601,
+      type: 3}
+    m_amount: 1
+    m_amountPerLevel: 1
+    m_recover: 1
+  includeInRealease: 1
