@@ -115,8 +115,12 @@ namespace Dvalin
                 for (int i = 0; i < recipe.m_resources.Length; i++)
                 {
                     var item = recipe.m_resources[i].m_resItem as ItemDropWrapper;
-                    if (item == null) continue;
-                    recipe.m_resources[i].m_resItem = WrapperToRuntime(item);
+                    if (item == null || !item.getFromRuntime) continue;
+
+                    var prefab = objectDb.GetItemPrefab(item.gameObject.name);
+                    if (prefab == null) continue;
+
+                    recipe.m_resources[i].m_resItem = prefab.GetComponent<ItemDrop>();
                 }
 
                 objectDb.m_recipes.Add(recipe);
