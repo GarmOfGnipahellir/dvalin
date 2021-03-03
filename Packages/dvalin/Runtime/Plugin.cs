@@ -128,6 +128,22 @@ namespace Dvalin
                 Dvalin.Logger.LogInfoFormat("Added recipe {0} to {1}", recipe, objectDb);
             }
 
+            foreach (var pieceInfo in m_ContentInfo.Pieces)
+            {
+                for (int i = 0; i < pieceInfo.Prefab.m_resources.Length; i++)
+                {
+                    var item = pieceInfo.Prefab.m_resources[i].m_resItem as ItemDropWrapper;
+                    if (item == null || !item.getFromRuntime) continue;
+
+                    var prefab = objectDb.GetItemPrefab(item.gameObject.name);
+                    if (prefab == null) continue;
+
+                    pieceInfo.Prefab.m_resources[i].m_resItem = prefab.GetComponent<ItemDrop>();
+                }
+
+                Dvalin.Logger.LogInfoFormat("Fixed rintime types for {0}", pieceInfo.Prefab);
+            }
+
             Dvalin.Logger.LogInfoFormat("Added Prefabs to {0}", objectDb);
         }
 

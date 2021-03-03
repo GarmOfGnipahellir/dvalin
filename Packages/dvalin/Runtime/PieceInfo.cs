@@ -61,13 +61,13 @@ namespace Dvalin
                 hammerTable.m_pieces.Add(Prefab.gameObject);
                 Logger.LogInfoFormat("{0} added to m_pieces", Prefab.m_name);
 
-                var known = player.IsRecipeKnown(Prefab.m_name);
-                Logger.LogInfoFormat("{0} known? {1}", Prefab.m_name, known);
-                if (!known)
-                {
-                    player.AddKnownPiece(Prefab);
-                    Logger.LogInfoFormat("{0} added to known", Prefab.m_name);
-                }
+                // var known = player.IsRecipeKnown(Prefab.m_name);
+                // Logger.LogInfoFormat("{0} known? {1}", Prefab.m_name, known);
+                // if (!known)
+                // {
+                //     player.AddKnownPiece(Prefab);
+                //     Logger.LogInfoFormat("{0} added to known", Prefab.m_name);
+                // }
             }
         }
 
