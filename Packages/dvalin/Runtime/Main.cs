@@ -6,17 +6,11 @@ using HarmonyLib;
 
 namespace Dvalin
 {
-    [BepInPlugin(k_Guid, k_Name, k_Version)]
-    [BepInProcess("valheim.exe")]
-    public class Plugin : BaseUnityPlugin
+    public class Main : IDestroyable
     {
-        public const string k_Author = "GarmOfGnipahellir";
         public const string k_Guid = "com.garmofgnipahellir.dvalin";
         public const string k_Name = "Dvalin";
         public const string k_Version = "0.3.0";
-        public const string k_Description = "Will be filled out later...";
-        public const string k_WebsiteUrl = "https://github.com/GarmOfGnipahellir/dvalin";
-        public static readonly string[] k_Dependencies = { "denikson-BepInExPack_Valheim" };
 
         private Harmony m_Harmony;
         private ContentLoader m_ContentLoader;
@@ -25,10 +19,8 @@ namespace Dvalin
 
         public static Paths paths { get; protected set; }
 
-        void Awake()
+        public Main()
         {
-            Logger.LogInfo(Path.GetFullPath("AssetBundles"));
-
             paths = new Paths();
 
             m_Harmony = new Harmony(k_Guid);
@@ -48,12 +40,12 @@ namespace Dvalin
             Patches.Player.OnSpawned.PostfixEvent += ModifyPieceTables;
             Patches.Smelter.Awake.PostfixEvent += ModifySmelterItemConversions;
 
-            Dvalin.Logger.LogInfo("Plugin awoken.");
+            Logger.LogInfo("Plugin awoken.");
         }
 
-        void OnDestroy()
+        public void Destroy()
         {
-            Dvalin.Logger.LogInfo("Destroying plugin.");
+            Logger.LogInfo("Destroying plugin.");
 
             foreach (var pieceInfo in m_ContentInfo.Pieces)
             {
@@ -84,7 +76,7 @@ namespace Dvalin
             {
                 nscene.m_prefabs.Add(pieceInfo.Prefab.gameObject);
 
-                Dvalin.Logger.LogInfoFormat("Added piece {0} to {1}", pieceInfo.Prefab, nscene);
+                Logger.LogInfoFormat("Added piece {0} to {1}", pieceInfo.Prefab, nscene);
             }
 
             foreach (var itemInfo in m_ContentInfo.Items)
@@ -93,10 +85,10 @@ namespace Dvalin
 
                 nscene.m_prefabs.Add(itemInfo.Prefab.gameObject);
 
-                Dvalin.Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, nscene);
+                Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, nscene);
             }
 
-            Dvalin.Logger.LogInfoFormat("Added Prefabs to {0}", nscene);
+            Logger.LogInfoFormat("Added Prefabs to {0}", nscene);
         }
 
         private void AddCustomObjects(ObjectDB objectDb)
@@ -107,7 +99,7 @@ namespace Dvalin
 
                 objectDb.m_items.Add(itemInfo.Prefab.gameObject);
 
-                Dvalin.Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, objectDb);
+                Logger.LogInfoFormat("Added item {0} to {1}", itemInfo.Prefab, objectDb);
             }
 
             foreach (var recipe in m_ContentInfo.Recipes)
@@ -125,7 +117,7 @@ namespace Dvalin
 
                 objectDb.m_recipes.Add(recipe);
 
-                Dvalin.Logger.LogInfoFormat("Added recipe {0} to {1}", recipe, objectDb);
+                Logger.LogInfoFormat("Added recipe {0} to {1}", recipe, objectDb);
             }
 
             foreach (var pieceInfo in m_ContentInfo.Pieces)
@@ -141,10 +133,10 @@ namespace Dvalin
                     pieceInfo.Prefab.m_resources[i].m_resItem = prefab.GetComponent<ItemDrop>();
                 }
 
-                Dvalin.Logger.LogInfoFormat("Fixed rintime types for {0}", pieceInfo.Prefab);
+                Logger.LogInfoFormat("Fixed rintime types for {0}", pieceInfo.Prefab);
             }
 
-            Dvalin.Logger.LogInfoFormat("Added Prefabs to {0}", objectDb);
+            Logger.LogInfoFormat("Added Prefabs to {0}", objectDb);
         }
 
         private void ModifyPieceTables(Player player)
@@ -164,10 +156,10 @@ namespace Dvalin
                 itemConversion.m_to = WrapperToRuntime(smelterItemConversion.to);
                 smelter.m_conversion.Add(itemConversion);
 
-                Dvalin.Logger.LogInfoFormat("Added {0} -> {1} to {2}", itemConversion.m_from, itemConversion.m_to, smelter);
+                Logger.LogInfoFormat("Added {0} -> {1} to {2}", itemConversion.m_from, itemConversion.m_to, smelter);
             }
 
-            Dvalin.Logger.LogInfoFormat("Added item conversions to {0}", smelter);
+            Logger.LogInfoFormat("Added item conversions to {0}", smelter);
         }
 
         private ItemDrop WrapperToRuntime(ItemDropWrapper wrapper)

@@ -13,7 +13,7 @@ namespace Dvalin
 
         public Logger()
         {
-            m_logSource = BepInEx.Logging.Logger.CreateLogSource(Plugin.k_Name);
+            m_logSource = BepInEx.Logging.Logger.CreateLogSource(Main.k_Name);
             Instance = this;
         }
 

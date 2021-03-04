@@ -1,7 +1,7 @@
 {
     "name": "Tests",
     "references": [
-        "Runtime",
+        "DwarvenIndustry",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],
