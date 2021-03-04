@@ -5,31 +5,50 @@ using UnityEngine;
 
 public class CableMount : MonoBehaviour
 {
+    public const float k_ConnectRange = 10;
+
     public CableLink linkPrefab;
     public Transform mountPoint;
-    public float connectRange = 10;
 
     protected List<CableLink> m_Links = new List<CableLink>();
 
     void Start()
     {
-        var nearbyMounts = FindInRadius(connectRange);
-        foreach (var nearbyMount in nearbyMounts)
+        ReconnectInRange();
+    }
+
+    void OnDestroy()
+    {
+        DisconnectAll();
+    }
+
+    public void ReconnectInRange()
+    {
+        DisconnectAll();
+
+        foreach (var mount in FindInRadius(k_ConnectRange))
         {
-            Connect(nearbyMount);
+            Connect(mount);
         }
     }
 
     public void Connect(CableMount other)
     {
-        if (!IsConnected(other))
-        {
-            var link = Object.Instantiate<CableLink>(linkPrefab);
-            link.mount1 = this;
-            link.mount2 = other;
+        if (IsConnected(other)) return;
 
-            m_Links.Add(link);
-            other.m_Links.Add(link);
+        var link = Object.Instantiate<CableLink>(linkPrefab);
+        link.mount1 = this;
+        link.mount2 = other;
+
+        m_Links.Add(link);
+        other.m_Links.Add(link);
+    }
+
+    public void DisconnectAll()
+    {
+        foreach (var link in m_Links.ToArray())
+        {
+            Disconnect(link);
         }
     }
 
@@ -53,5 +72,13 @@ public class CableMount : MonoBehaviour
             .Select(x => x.GetComponentInParent<CableMount>())
             .Where(x => x != null)
             .ToArray();
+    }
+
+    public static void Disconnect(CableLink link)
+    {
+        link.mount1.m_Links.Remove(link);
+        link.mount2.m_Links.Remove(link);
+
+        Object.Destroy(link.gameObject);
     }
 }

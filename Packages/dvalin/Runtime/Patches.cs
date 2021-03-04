@@ -5,7 +5,7 @@ namespace Dvalin.Patches
     namespace Player
     {
         [HarmonyPatch(typeof(global::Player), "OnSpawned")]
-        class OnSpawned
+        public class OnSpawned
         {
             public delegate void PostfixHandler(global::Player player);
 
@@ -18,12 +18,25 @@ namespace Dvalin.Patches
                 PostfixEvent?.Invoke(__instance);
             }
         }
+
+        [HarmonyPatch(typeof(global::Player), "UpdatePlacementGhost")]
+        public class UpdatePlacementGhost
+        {
+            public delegate void PostfixHandler(global::Player player);
+
+            public static event PostfixHandler PostfixEvent;
+
+            static void Postfix(global::Player __instance)
+            {
+                PostfixEvent?.Invoke(__instance);
+            }
+        }
     }
 
     namespace Smelter
     {
         [HarmonyPatch(typeof(global::Smelter), "Awake")]
-        class Awake
+        public class Awake
         {
             public delegate void PostfixHandler(global::Smelter smelter);
 
@@ -39,7 +52,7 @@ namespace Dvalin.Patches
     namespace Localization
     {
         [HarmonyPatch(typeof(global::Localization), "SetupLanguage")]
-        class SetupLanguage
+        public class SetupLanguage
         {
             public delegate void PostfixHandler(string language);
 
@@ -52,7 +65,7 @@ namespace Dvalin.Patches
         }
 
         [HarmonyPatch(typeof(global::Localization), "Translate")]
-        class Translate
+        public class Translate
         {
             public delegate bool PostfixHandler(string word, out string translated);
 
@@ -79,7 +92,7 @@ namespace Dvalin.Patches
     namespace ZNetScene
     {
         [HarmonyPatch(typeof(global::ZNetScene), "Awake")]
-        class Awake
+        public class Awake
         {
             public delegate void PrefixHandler(global::ZNetScene nscene);
 
@@ -97,7 +110,7 @@ namespace Dvalin.Patches
     namespace ObjectDB
     {
         [HarmonyPatch(typeof(global::ObjectDB), "Awake")]
-        class Awake
+        public class Awake
         {
             public delegate void PrefixHandler(global::ObjectDB objectDb);
 

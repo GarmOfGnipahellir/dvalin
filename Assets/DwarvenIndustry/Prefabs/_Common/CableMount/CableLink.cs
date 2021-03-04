@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 [RequireComponent(typeof(LineRenderer))]
 public class CableLink : MonoBehaviour
 {
-    const float k_CableWidth = 0.15f;
     const float k_PositionGap = 0.3f;
+    const float k_CableWidth = 0.15f;
     const float k_CableSlack = 0.5f;
-    
+
     public CableMount mount1;
     public CableMount mount2;
 
@@ -20,7 +19,7 @@ public class CableLink : MonoBehaviour
         m_Renderer = GetComponent<LineRenderer>();
     }
 
-    void Update()
+    void Start()
     {
         RebuildLine();
     }
@@ -32,6 +31,7 @@ public class CableLink : MonoBehaviour
 
         float distance = (mp2 - mp1).magnitude;
         int numPositions = (int)(distance / k_PositionGap);
+        float normalizedLength = distance / CableMount.k_ConnectRange;
 
         Vector3[] positions = new Vector3[numPositions];
         for (int i = 0; i < numPositions; i++)
@@ -40,7 +40,8 @@ public class CableLink : MonoBehaviour
             float t = a * 2 - 1;
             positions[i] =
                 Vector3.Lerp(mp1, mp2, a) +
-                Vector3.down * Mathf.Abs(t * t - 1) * k_CableSlack;
+                Vector3.down * Mathf.Abs(t * t - 1) * 
+                k_CableSlack * normalizedLength;
         }
 
         m_Renderer.positionCount = numPositions;

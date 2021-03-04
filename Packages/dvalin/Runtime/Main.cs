@@ -133,7 +133,7 @@ namespace Dvalin
                     pieceInfo.Prefab.m_resources[i].m_resItem = prefab.GetComponent<ItemDrop>();
                 }
 
-                Logger.LogInfoFormat("Fixed rintime types for {0}", pieceInfo.Prefab);
+                Logger.LogInfoFormat("Fixed runtime types for {0}", pieceInfo.Prefab);
             }
 
             Logger.LogInfoFormat("Added Prefabs to {0}", objectDb);
