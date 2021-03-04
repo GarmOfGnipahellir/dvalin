@@ -33,11 +33,9 @@ public class Plugin : BaseUnityPlugin
             .GetField("m_placementGhost", BindingFlags.NonPublic | BindingFlags.Instance)
             .GetValue(player) as GameObject;
         if (placementGhost == null) return;
-        Dvalin.Logger.LogInfoFormat("Updated Ghost: {0}", placementGhost);
 
         Machine machine = placementGhost.GetComponent<Machine>();
         if (machine == null) return;
-        Dvalin.Logger.LogInfoFormat("Updated Machine Ghost: {0}", machine);
 
         machine.cableMount.ReconnectInRange();
     }
