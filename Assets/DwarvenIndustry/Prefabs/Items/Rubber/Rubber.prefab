@@ -156,7 +156,7 @@ MonoBehaviour:
       m_icons:
       - {fileID: 21300000, guid: 6c765258e3ed41b45921d3b8c0e5d242, type: 3}
       m_attachOverride: 0
-      m_description: $dvalin_item_rubber_description
+      m_description: 
       m_maxStackSize: 50
       m_maxQuality: 1
       m_weight: 0.1

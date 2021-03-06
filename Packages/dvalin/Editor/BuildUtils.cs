@@ -179,7 +179,7 @@ namespace Dvalin.Editor
         public string WebsiteURL = "";
         public string Description = "";
         public string GameVersion = "0.0.0";
-        public string[] Dependencies = { "denikson-BepInExPack_Valheim" };
+        public string[] Dependencies = { "denikson-BepInExPack_Valheim-*" };
         public string[] OptionalDependencies = { };
         public string[] Incompatibilities = { };
         public string NetworkMode = "both";

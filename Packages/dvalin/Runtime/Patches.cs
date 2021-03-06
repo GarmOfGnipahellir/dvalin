@@ -33,6 +33,22 @@ namespace Dvalin.Patches
         }
     }
 
+    namespace ItemDrop
+    {
+        [HarmonyPatch(typeof(global::ItemDrop), "Awake")]
+        public class Awake
+        {
+            public delegate void PostfixHandler(global::ItemDrop itemDrop);
+
+            public static event PostfixHandler PostfixEvent;
+
+            static void Postfix(global::ItemDrop __instance)
+            {
+                PostfixEvent?.Invoke(__instance);
+            }
+        }
+    }
+
     namespace Smelter
     {
         [HarmonyPatch(typeof(global::Smelter), "Awake")]

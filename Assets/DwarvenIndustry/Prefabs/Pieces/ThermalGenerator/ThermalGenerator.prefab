@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3417040850843990539}
   - component: {fileID: 3375149069197523575}
   - component: {fileID: 4953071114285686993}
+  - component: {fileID: 1125552496005176531}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -106,9 +107,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34614824127b3eb469de6f6caf7c0e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hoverText: $dvalin_piece_crusher_input_use
+  m_hoverText: 
   m_name: 
   m_holdRepeatInterval: -1
+--- !u!114 &1125552496005176531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365508439958462910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fca51adafa3a6b4ba49b3661b7cedd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capacity: 10
+  validItems:
+  - {fileID: 539895477963861221, guid: fde0b55036d577e45956226008c405dd, type: 3}
 --- !u!1 &2806489358995286667
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +182,8 @@ MonoBehaviour:
   m_primaryTarget: 0
   m_randomTarget: 1
   m_icon: {fileID: 21300000, guid: 33767e4e3255f4146b041d2e41cfd72a, type: 3}
-  m_name: $dvalin_piece_thermalgenerator
-  m_description: $dvalin_piece_thermalgenerator_description
+  m_name: $di_piece_thermalgenerator
+  m_description: 
   m_enabled: 1
   m_category: 0
   m_isUpgrade: 0

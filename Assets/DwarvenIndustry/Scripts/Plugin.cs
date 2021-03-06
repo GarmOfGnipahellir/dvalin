@@ -20,6 +20,15 @@ public class Plugin : BaseUnityPlugin
         dvalin = new Dvalin.Main();
 
         Dvalin.Patches.Player.UpdatePlacementGhost.PostfixEvent += UpdateMachinePlacementGhost;
+        Dvalin.Patches.ItemDrop.Awake.PostfixEvent += (ItemDrop itemDrop) =>
+        {
+            // ZNetView nview = typeof(ItemDrop)
+            //     .GetField("m_nview", BindingFlags.NonPublic | BindingFlags.Instance)
+            //     .GetValue(itemDrop) as ZNetView;
+            Dvalin.ZNetViewWrapper nview = itemDrop.GetComponent<Dvalin.ZNetViewWrapper>();
+            
+            Dvalin.Logger.LogInfoFormat("ItemDrop ZNetView stuff: ", nview, nview.IsValid());
+        };
     }
 
     void OnDestroy()

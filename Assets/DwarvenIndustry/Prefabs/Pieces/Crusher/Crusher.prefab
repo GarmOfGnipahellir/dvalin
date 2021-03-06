@@ -58,8 +58,8 @@ MonoBehaviour:
   m_primaryTarget: 0
   m_randomTarget: 1
   m_icon: {fileID: 21300000, guid: f6026a99f9844ab41bffb1879652768c, type: 3}
-  m_name: $dvalin_piece_crusher
-  m_description: $dvalin_piece_crusher_description
+  m_name: $di_piece_crusher
+  m_description: 
   m_enabled: 1
   m_category: 1
   m_isUpgrade: 0
@@ -193,6 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputSwitch: {fileID: 5199893808973449687}
+  queueCapacity: 10
+  processDuration: 3
 --- !u!1 &4687210275016238419
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34614824127b3eb469de6f6caf7c0e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hoverText: $dvalin_piece_crusher_input_use
+  m_hoverText: 
   m_name: 
   m_holdRepeatInterval: -1
 --- !u!1 &6681767015212851914
