@@ -12,9 +12,9 @@ FBXHeaderExtension:  {
 		Month: 3
 		Day: 5
 		Hour: 0
-		Minute: 12
-		Second: 10
-		Millisecond: 203
+		Minute: 36
+		Second: 40
+		Millisecond: 641
 	}
 	Creator: "FBX SDK/FBX Plugins version 2016.1.1"
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
@@ -58,7 +58,7 @@ GlobalSettings:  {
 		P: "OriginalUpAxis", "int", "Integer", "",-1
 		P: "OriginalUpAxisSign", "int", "Integer", "",1
 		P: "UnitScaleFactor", "double", "Number", "",1
-		P: "OriginalUnitScaleFactor", "double", "Number", "",100
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
 		P: "AmbientColor", "ColorRGB", "Color", "",0,0,0
 		P: "DefaultCamera", "KString", "", "", "Producer Perspective"
 		P: "TimeMode", "enum", "", "",0
@@ -77,7 +77,7 @@ GlobalSettings:  {
 
 Documents:  {
 	Count: 1
-	Document: 125733249792, "", "Scene" {
+	Document: 124125827072, "", "Scene" {
 		Properties70:  {
 			P: "SourceObject", "object", "", ""
 			P: "ActiveAnimStackName", "KString", "", "", ""
@@ -198,7 +198,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Geometry: 6354821632, "Geometry::CubePiece_New", "Mesh" {
+	Geometry: 5650953728, "Geometry::CubePiece_New", "Mesh" {
 		Vertices: *24 {
 			a: -0.5,-0.5,-0.5,0.5,-0.5,-0.5,0.5,-0.5,0.5,-0.5,-0.5,0.5,-0.5,0.5,-0.5,0.5,0.5,-0.5,0.5,0.5,0.5,-0.5,0.5,0.5
 		} 
@@ -242,14 +242,12 @@ Objects:  {
 			}
 		}
 	}
-	Model: 111805317376, "Model::CubePiece_New", "Mesh" {
+	Model: 8442039168, "Model::CubePiece_New", "Mesh" {
 		Version: 232
 		Properties70:  {
 			P: "RotationActive", "bool", "", "",1
 			P: "InheritType", "enum", "", "",1
-			P: "ScalingMax", "Vector3D", "Vector", "",100,100,100
 			P: "DefaultAttributeIndex", "int", "Integer", "",0
-			P: "Lcl Scaling", "Lcl Scaling", "", "A",100,100,100
 			P: "Visibility Inheritance", "Visibility Inheritance", "", "",0
 		}
 		Shading: Y
@@ -263,10 +261,10 @@ Objects:  {
 Connections:  {
 	
 	;Model::CubePiece_New, Model::RootNode
-	C: "OO",111805317376,0
+	C: "OO",8442039168,0
 	
 	;Geometry::CubePiece_New, Model::CubePiece_New
-	C: "OO",6354821632,111805317376
+	C: "OO",5650953728,8442039168
 }
 ;Takes section
 ;----------------------------------------------------
