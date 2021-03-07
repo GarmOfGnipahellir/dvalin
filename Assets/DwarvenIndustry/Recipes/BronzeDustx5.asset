@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa7304436c28af94cb90bc08b9436e1f, type: 3}
-  m_Name: BronzeDust
+  m_Name: BronzeDustx5
   m_EditorClassIdentifier: 
   m_item: {fileID: 539895477963861221, guid: c3576ae2614000049924a61dc961f97b, type: 3}
-  m_amount: 1
+  m_amount: 5
   m_enabled: 1
   m_craftingStation: {fileID: 0}
   m_repairStation: {fileID: 0}
@@ -21,12 +21,12 @@ MonoBehaviour:
   m_resources:
   - m_resItem: {fileID: 539895477963861221, guid: 39ba108cb42fd2a428e11ecf967b9e74,
       type: 3}
-    m_amount: 2
-    m_amountPerLevel: 2
+    m_amount: 10
+    m_amountPerLevel: 10
     m_recover: 1
   - m_resItem: {fileID: 539895477963861221, guid: 361394556b6c1f84eb1ea51a7d27155f,
       type: 3}
-    m_amount: 1
-    m_amountPerLevel: 1
+    m_amount: 5
+    m_amountPerLevel: 5
     m_recover: 1
   includeInRealease: 1

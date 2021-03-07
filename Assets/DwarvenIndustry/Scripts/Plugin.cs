@@ -25,6 +25,8 @@ public class Plugin : BaseUnityPlugin
             ZNetView nview = typeof(ItemDrop)
                 .GetField("m_nview", BindingFlags.NonPublic | BindingFlags.Instance)
                 .GetValue(itemDrop) as ZNetView;
+
+            if (nview == null) return;
             
             Dvalin.Logger.LogInfoFormat("{0} is valid? {1}", nview, nview.IsValid());
         };
