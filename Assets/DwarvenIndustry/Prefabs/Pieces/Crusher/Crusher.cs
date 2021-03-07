@@ -1,110 +1,92 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Machine), typeof(Piece))]
 public class Crusher : MonoBehaviour
 {
-    public Switch inputSwitch;
-    public int queueCapacity = 10;
-    public float processDuration = 3f; // ANCHOR maybe use num cycles instead?
+    public Transform output;
+    public float secPerProduct = 10f;
+    public int dustPerOre = 2;
+    public Smelter.ItemConversion[] conversions;
 
-    protected ZNetView m_Nview;
-    protected Machine m_Machine;
-    protected Piece m_Piece;
+    private Machine m_Machine;
+    private ZNetView m_Nview;
 
-    public ZDO zdo { get { return m_Nview.GetZDO(); } }
-    public int queuedCount
+    public Machine machine
     {
         get
         {
-            return zdo.GetInt(nameof(queuedCount));
-        }
-        set
-        {
-            zdo.Set(nameof(queuedCount), value);
+            if (!m_Machine)
+            {
+                m_Machine = GetComponentInParent<Machine>();
+                Debug.Assert(m_Machine);
+            }
+            return m_Machine;
         }
     }
-    public float processTime
+    public ZNetView nview
     {
         get
         {
-            return zdo.GetFloat(nameof(processTime));
+            if (!m_Nview)
+            {
+                m_Nview = GetComponentInParent<ZNetView>();
+                Debug.Assert(m_Nview);
+            }
+            return m_Nview;
+        }
+    }
+    public ZDO zdo { get { return nview.GetZDO(); } }
+    public float processTimer
+    {
+        get
+        {
+            return zdo.GetFloat(nameof(processTimer));
         }
         set
         {
-            zdo.Set(nameof(processTime), value);
+            zdo.Set(nameof(processTimer), value);
         }
     }
 
     void Awake()
     {
-        m_Nview = GetComponent<ZNetView>();
-        m_Machine = GetComponent<Machine>();
-        m_Piece = GetComponent<Piece>();
+        machine.input.validItems = conversions
+            .Select(x => (Dvalin.ItemDropWrapper)x.m_from)
+            .ToArray();
 
-        inputSwitch.m_onUse += OnInputUsed;
-
-        m_Nview.Register("InputUsed", RPC_InputUsed);
-        InvokeRepeating("UpdateCrusher", 1f, 1f); // ANCHOR why not coroutine?
+        InvokeRepeating("ProcessProduct", 1f, 1f);
     }
 
-    void FixedUpdate()
+    protected void ProcessProduct()
     {
-        if (!m_Nview.IsValid()) return;
+        if (!nview.IsValid() || !nview.IsOwner()) return;
 
-        UpdateHoverTexts();
-    }
+        var deltaTime = GetDeltaTime();
 
-    protected void UpdateHoverTexts()
-    {
-        inputSwitch.m_hoverText = string.Format(
-            "{0} ({1}/{2})\n{3}",
-            m_Piece.m_name,
-            queuedCount,
-            queueCapacity,
-            processTime
-        );
-    }
+        if (machine.input.counter <= 0) return;
 
-    protected bool OnInputUsed(Switch sw, Humanoid user, ItemDrop.ItemData item)
-    {
-        if (queuedCount >= queueCapacity)
+        if ((processTimer += (float)deltaTime) >= secPerProduct)
         {
-            user.Message(MessageHud.MessageType.Center, "$msg_itsfull");
-            return false;
+            Spawn(machine.input.firstItem);
+            machine.input.ConsumeFirstItem();
+            processTimer = 0;
         }
-
-        user.Message(MessageHud.MessageType.Center, "$msg_added");
-        m_Nview.InvokeRPC("InputUsed");
-        return true;
     }
 
-    protected void RPC_InputUsed(long sender)
+    protected void Spawn(string itemName)
     {
-        if (!m_Nview.IsOwner()) return;
+        var conversion = conversions.Single(x => x.m_from.gameObject.name == itemName);
+        if (conversion == null) return;
 
-        queuedCount++;
-    }
-
-    protected void UpdateCrusher()
-    {
-        // ANCHOR could just not repeat this instead of checking every cycle?
-        if (!m_Nview.IsValid() || !m_Nview.IsOwner()) return;
-
-        // need to do this to always update last cycle time
-        var deltaTime = GetDeltaTime(); // time since last cycle
-
-        if (queuedCount <= 0) return;
-
-        processTime += (float)deltaTime;
-
-        if (processTime >= processDuration)
-        {
-            queuedCount--;
-            processTime = 0f;
-        }
+        UnityEngine.Object.Instantiate<GameObject>(
+            conversion.m_to.gameObject,
+            output.position,
+            output.rotation
+        ).GetComponent<ItemDrop>().m_itemData.m_stack = dustPerOre;
     }
 
     // from valheim smelter

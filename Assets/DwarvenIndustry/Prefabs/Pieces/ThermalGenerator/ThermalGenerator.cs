@@ -7,7 +7,7 @@ using UnityEngine;
 public class ThermalGenerator : MonoBehaviour
 {
     public ItemInput input;
-    public float secPerFuel;
+    public float secPerFuel = 10f;
 
     private ZNetView m_Nview;
 
@@ -36,18 +36,24 @@ public class ThermalGenerator : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
-        StartCoroutine(ProcessFuel());
+        InvokeRepeating("BurnFuel", 1f, 1f);
     }
 
-    IEnumerator ProcessFuel()
+    protected void BurnFuel()
     {
-        yield return new WaitForSeconds(1f);
+        if (!nview.IsValid() || !nview.IsOwner()) return;
 
         var deltaTime = GetDeltaTime();
 
-        StartCoroutine(ProcessFuel());
+        if (input.counter <= 0) return;
+
+        if ((burnTimer += (float)deltaTime) >= secPerFuel)
+        {
+            input.ConsumeFirstItem();
+            burnTimer = 0;
+        }
     }
 
     // from valheim smelter
