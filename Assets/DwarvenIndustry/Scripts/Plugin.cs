@@ -22,12 +22,11 @@ public class Plugin : BaseUnityPlugin
         Dvalin.Patches.Player.UpdatePlacementGhost.PostfixEvent += UpdateMachinePlacementGhost;
         Dvalin.Patches.ItemDrop.Awake.PostfixEvent += (ItemDrop itemDrop) =>
         {
-            // ZNetView nview = typeof(ItemDrop)
-            //     .GetField("m_nview", BindingFlags.NonPublic | BindingFlags.Instance)
-            //     .GetValue(itemDrop) as ZNetView;
-            Dvalin.ZNetViewWrapper nview = itemDrop.GetComponent<Dvalin.ZNetViewWrapper>();
+            ZNetView nview = typeof(ItemDrop)
+                .GetField("m_nview", BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetValue(itemDrop) as ZNetView;
             
-            Dvalin.Logger.LogInfoFormat("ItemDrop ZNetView stuff: ", nview, nview.IsValid());
+            Dvalin.Logger.LogInfoFormat("{0} is valid? {1}", nview, nview.IsValid());
         };
     }
 

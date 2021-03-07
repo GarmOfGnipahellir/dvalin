@@ -183,13 +183,13 @@ MonoBehaviour:
     m_quality: 1
     m_variant: 0
     m_shared:
-      m_name: $dvalin_item_cable
+      m_name: $di_item_cable
       m_dlc: 
       m_itemType: 1
       m_icons:
       - {fileID: 21300000, guid: 231e834c1d7fd024a8af69b0ee109606, type: 3}
       m_attachOverride: 0
-      m_description: $dvalin_item_cable_description
+      m_description: $di_item_cable_description
       m_maxStackSize: 100
       m_maxQuality: 1
       m_weight: 0.1

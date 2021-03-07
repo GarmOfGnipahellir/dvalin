@@ -5,5 +5,9 @@ dvalin_piece_maptable,Map Table,Kartbord
 dvalin_piece_maptable_description,Shows where you've been.,Visar var du har varit.
 dvalin_piece_maptable_use,Update Maps,Updatera Kartor
 
+di_item_cable,Cable,Kabel
+di_item_cable_description,More commonly known as Dvergr String.,Kallas ofta för Dvärg snöre.
+di_item_rubber,Rubber,Gummi
+
 di_piece_crusher,Crusher,Malmkross
 di_piece_thermalgenerator,Thermal Power Station,Värmekraftverk

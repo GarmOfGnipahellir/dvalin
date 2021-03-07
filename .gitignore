@@ -1,6 +1,7 @@
 # Dvalin specific
 /[Aa]sset[Bb]undles/
 /[Dd]ist/
+/*.zip
 
 # Packages are WIP for now or not distributed
 [Pp]ackages/*
