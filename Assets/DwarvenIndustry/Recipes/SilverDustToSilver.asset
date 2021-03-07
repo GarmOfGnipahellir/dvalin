@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e048b3c22918042ac441fa84698614, type: 3}
+  m_Name: SilverDustToSilver
+  m_EditorClassIdentifier: 
+  from: {fileID: 539895477963861221, guid: e499c3cd0fc179445951d1ecfd851a64, type: 3}
+  to: {fileID: 539895477963861221, guid: 85ab9b139bee31e4e9058fd698965daa, type: 3}
+  includeInRealease: 1

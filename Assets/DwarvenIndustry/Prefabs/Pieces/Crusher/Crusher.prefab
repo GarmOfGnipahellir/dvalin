@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   output: {fileID: 7166847040440981948}
   secPerProduct: 10
+  dustPerOre: 2
   conversions:
   - m_from: {fileID: 539895477963861221, guid: 73b5ac94cc127be41b18ead31fb9c1cf, type: 3}
     m_to: {fileID: 539895477963861221, guid: 39ba108cb42fd2a428e11ecf967b9e74, type: 3}
@@ -204,6 +205,10 @@ MonoBehaviour:
     m_to: {fileID: 539895477963861221, guid: c4b92b1ea4fe19c4198e67d1bb318750, type: 3}
   - m_from: {fileID: 539895477963861221, guid: ccd3ce8ebb8d7144ab27ea92976f476e, type: 3}
     m_to: {fileID: 539895477963861221, guid: c4b92b1ea4fe19c4198e67d1bb318750, type: 3}
+  - m_from: {fileID: 539895477963861221, guid: d027cbc26f1536147b9625a2b2160038, type: 3}
+    m_to: {fileID: 539895477963861221, guid: e499c3cd0fc179445951d1ecfd851a64, type: 3}
+  - m_from: {fileID: 539895477963861221, guid: 33d3995becc5e2042a0c38ad4072cd54, type: 3}
+    m_to: {fileID: 539895477963861221, guid: 0e3923eb42d04f142bd98f83a0049570, type: 3}
 --- !u!1 &4687210275016238419
 GameObject:
   m_ObjectHideFlags: 0

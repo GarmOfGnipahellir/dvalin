@@ -12,6 +12,8 @@ di_item_rubber,Rubber,Gummi
 di_item_copperdust,Copper Dust,Kopparpulver
 di_item_tindust,Tin Dust,Tennpulver
 di_item_irondust,Iron Dust,Järnpulver
+di_item_silverdust,Silver Dust,Silverpulver
+di_item_blackmetaldust,Black Metal Dust,Svartmetallpulver
 
 di_piece_crusher,Crusher,Malmkross
 di_piece_thermalgenerator,Thermal Power Station,Värmekraftverk
