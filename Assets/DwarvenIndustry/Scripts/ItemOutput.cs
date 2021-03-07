@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class ItemInput : MonoBehaviour
+// NOTE: works more like a queue than just a container right now
+// should really only keep track of how many of each item it has not
+// an ordered list of item names. side effect of basing it on input
+// HOLUP! a queue is probably better when we get logistics in,
+// since they should output in the same order as they were added
+// even if there's a bottle neck making it pile up.
+public class ItemOutput : MonoBehaviour
 {
-    private const string k_ZDONamespace = "input_";
+    private const string k_ZDONamespace = "output_";
 
     public int capacity = 10;
-    public Dvalin.ItemDropWrapper[] validItems;
 
     private Switch m_UseSwitch;
     private Piece m_Piece;
@@ -62,13 +67,12 @@ public class ItemInput : MonoBehaviour
             zdo.Set(k_ZDONamespace + nameof(counter), value);
         }
     }
-    public string firstItem { get { return GetItem(0); } }
 
     void Awake()
     {
-        useSwitch.m_onUse += OnInputUsed;
+        useSwitch.m_onUse += OnOutputUsed;
 
-        nview.Register<string>("InputUsed", RPC_InputUsed);
+        nview.Register("OutputUsed", RPC_OutputUsed);
     }
 
     void FixedUpdate()
@@ -81,35 +85,21 @@ public class ItemInput : MonoBehaviour
     public string GetItem(int index) { return zdo.GetString(string.Format("{0}item{1}", k_ZDONamespace, index)); }
     public void SetItem(int index, string value) { zdo.Set(string.Format("{0}item{1}", k_ZDONamespace, index), value); }
 
-    public ItemDrop.ItemData FindValidItem(Inventory inventory)
+    public void AddItem(string itemName, int num = 1)
     {
-        foreach (var validItem in validItems)
+        for (int i = 0; i < num; i++)
         {
-            var item = inventory.GetItem(validItem.runtimeItemDrop.m_itemData.m_shared.m_name);
-            if (item != null)
-            {
-                return item;
-            }
+            SetItem(counter, itemName);
+            counter++;
         }
-        return null;
     }
-
-    public void ConsumeFirstItem()
-    {
-        if (counter <= 0) return;
-
-        for (int i = 0; i < counter; i++)
-        {
-            SetItem(i, GetItem(i + 1));
-        }
-        counter--;
-    }
+    public void AddItem(ItemDrop.ItemData item, int num = 1) { AddItem(item.m_dropPrefab.name, num); }
 
     protected void UpdateHoverTexts()
     {
         useSwitch.m_hoverText = string.Format(
             // NOTE: $piece_smelter_additem translation might change!
-            "{0} ({1}/{2})\n[<color=yellow><b>$KEY_Use</b></color>] $piece_smelter_additem",
+            "{0} ({1}/{2})\n[<color=yellow><b>$KEY_Use</b></color>] $piece_smelter_empty",
             piece.m_name,
             counter,
             capacity
@@ -121,40 +111,34 @@ public class ItemInput : MonoBehaviour
         }
     }
 
-    protected bool OnInputUsed(Switch sw, Humanoid user, ItemDrop.ItemData item)
+    protected bool OnOutputUsed(Switch sw, Humanoid user, ItemDrop.ItemData item)
     {
-        if (item == null)
-        {
-            item = FindValidItem(user.GetInventory());
-            if (item == null)
-            {
-                user.Message(MessageHud.MessageType.Center, "$msg_noprocessableitems");
-                return false;
-            }
-        }
-        else if (!Array.Exists(validItems, x => x.name == item.m_dropPrefab.name))
-        {
-            user.Message(MessageHud.MessageType.Center, "$msg_wrongitem");
-            return false;
-        }
-
-        if (counter >= capacity)
-        {
-            user.Message(MessageHud.MessageType.Center, "$msg_itsfull");
-            return false;
-        }
-
-        user.Message(MessageHud.MessageType.Center, string.Format("$msg_added {0}", item.m_shared.m_name));
-        user.GetInventory().RemoveItem(item, 1);
-        nview.InvokeRPC("InputUsed", item.m_dropPrefab.name);
+        nview.InvokeRPC("OutputUsed");
         return true;
     }
 
-    protected void RPC_InputUsed(long sender, string itemName)
+    protected void RPC_OutputUsed(long sender)
     {
         if (!nview.IsOwner()) return;
 
-        SetItem(counter, itemName);
-        counter++;
+        var stacks = new Dictionary<string, int>();
+        for (int i = 0; i < counter; i++)
+        {
+            var itemName = GetItem(i);
+            var num = 0;
+            stacks.TryGetValue(itemName, out num);
+            stacks[itemName] = (num += 1);
+        }
+        foreach (var kvp in stacks)
+        {
+            var item = ObjectDB.instance.GetItemPrefab(kvp.Key);
+
+            UnityEngine.Object.Instantiate<GameObject>(
+                item,
+                transform.position,
+                transform.rotation
+            ).GetComponent<ItemDrop>().m_itemData.m_stack = kvp.Value;
+        }
+        counter = 0;
     }
 }

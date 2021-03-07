@@ -71,22 +71,18 @@ public class Crusher : MonoBehaviour
 
         if ((processTimer += (float)deltaTime) >= secPerProduct)
         {
-            Spawn(machine.input.firstItem);
+            Output(machine.input.firstItem);
             machine.input.ConsumeFirstItem();
             processTimer = 0;
         }
     }
 
-    protected void Spawn(string itemName)
+    protected void Output(string itemName)
     {
         var conversion = conversions.Single(x => x.m_from.gameObject.name == itemName);
         if (conversion == null) return;
 
-        UnityEngine.Object.Instantiate<GameObject>(
-            conversion.m_to.gameObject,
-            output.position,
-            output.rotation
-        ).GetComponent<ItemDrop>().m_itemData.m_stack = dustPerOre;
+        machine.output.AddItem(conversion.m_to.gameObject.name, dustPerOre);
     }
 
     // from valheim smelter

@@ -6,4 +6,5 @@ public class Machine : MonoBehaviour
 {
     public CableMount cableMount;
     public ItemInput input;
+    public ItemOutput output;
 }
